@@ -1,5 +1,5 @@
 #include "pyramid.h"
-#include <iostream> //was missing: cout can't be used withoud
+#include <iostream> //was missing: cout, cin and endl can't be used withoud
 
 using namespace std;
 
@@ -10,7 +10,7 @@ int main() {
 	cin >> base; //cin << something is not correct. the input must go into the variable, not viceversa...
 
 	cout << "Enter the height of the pyramid: ";
-	cin >> height;
+	cin >> height; //same as on line 10.
 
 	PYRAMID pyramid = construct_pyramid(base, height);
 

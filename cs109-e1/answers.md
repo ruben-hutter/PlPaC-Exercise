@@ -8,5 +8,12 @@
 5. Ok, 0 in return statement is evaluated just fine. 0 is equal to false. 0 will be returned.
 
 ## Question 2: Error Search
-###b)
-Using the g++ compiler, you can compile the programm with: `g++ main.cpp -o pyramid_prog`.
+### a)
+Commented the errors directly in the respective files.
+
+### b)
+Using the g++ compiler, you can first compile the object file for pyramid.cpp with: `g++ -c pyramid.cpp`. Than you can compile the programm with: `g++ main.cpp pyramid.o -o pyramid_prog`.
+If you want to include the math library, you need to add `-lm` compiling the programm, but since it wasn't needed we commented it out, in order to save some memory.
+
+## Question 3: Strings and I/O
+

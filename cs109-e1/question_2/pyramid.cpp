@@ -8,5 +8,5 @@ PYRAMID construct_pyramid(int base, int height) { //the name of the function has
 
 double calculate(PYRAMID &p) {
 	double res = (double)1/3 * (p.base * p.base) * p.height; //at least a parameter must be double in the division, or an int division will be executed.
-	return res;
+	return res; //you want to return the result, not the adress of result
 }
