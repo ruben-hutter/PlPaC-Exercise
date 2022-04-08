@@ -12,8 +12,8 @@
 Commented the errors directly in the respective files.
 
 ### b)
-Using the g++ compiler, you can first compile the object file for pyramid.cpp with: `g++ -c pyramid.cpp`. Than you can compile the programm with: `g++ main.cpp pyramid.o -o pyramid_prog`.
-If you want to include the math library, you need to add `-lm` compiling the programm, but since it wasn't needed we commented it out, in order to save some memory.
+Using the g++ compiler, you can first compile the object file for pyramid.cpp with: `g++ -c pyramid.cpp`. Than you can compile the programm (and link main.cpp with the new pyramid.o) with: `g++ main.cpp pyramid.o -o pyramid_prog`.
+If you want to link the math library, you need to add `-lm` compiling the programm, but since it wasn't needed we commented the include statement out, in order to save some memory.
 
 ## Question 3: Strings and I/O
 
