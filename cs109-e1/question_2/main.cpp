@@ -12,10 +12,9 @@ int main() {
 	cout << "Enter the height of the pyramid: ";
 	cin >> height;
 
-	PYRAMID* pyramid = construct_pyramid(base, height);
-	PYRAMID& pyramid_ref = *pyramid;
+	PYRAMID pyramid = construct_pyramid(base, height);
 
-	cout << "The volume of the pyramid is: " << *calculate(pyramid_ref) << endl; //dereference return value of calculate()
+	cout << "The volume of the pyramid is: " << calculate(pyramid) << endl;
 
 	return 0;
 }

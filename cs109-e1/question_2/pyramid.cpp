@@ -1,14 +1,12 @@
 #include "pyramid.h"
-#include <math.h>
+//#include <math.h>		not needed
 
-PYRAMID* construct(int base, int height) { //the return value has to be also a pointer to a PYRAMID object
-	PYRAMID p = {base, height}; 
-	PYRAMID *p_ptr = &p; //p must be a pointer because it is initialized in a method and then returned.
-	return p_ptr;
+PYRAMID construct_pyramid(int base, int height) { //the name of the function has to be the same as in the header file.
+	PYRAMID p = {base, height};
+	return p;
 }
 
-double* calculate(PYRAMID &p) {
-	double res = 1/3 * (p.base * p.base) * p.height;
-	double *res_ptr = &res; //same as with construct(). pointer has to be returned
-	return res_ptr;
+double calculate(PYRAMID &p) {
+	double res = (double)1/3 * (p.base * p.base) * p.height; //at least a parameter must be double in the division, or an int division will be executed.
+	return res;
 }
