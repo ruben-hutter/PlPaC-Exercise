@@ -10,4 +10,4 @@ PYRAMID construct_pyramid(int base, int height);
 
 double calculate(PYRAMID &p);
 
-#endif //was missing
+#endif // was missing
