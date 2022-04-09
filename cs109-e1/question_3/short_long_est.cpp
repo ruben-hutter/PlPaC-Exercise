@@ -4,6 +4,10 @@
 
 using namespace std;
 
+/**
+ * Funcion that prints the longest and
+ * the shortest word of a given sentence.
+ */
 void short_long_est() {
     // initialize variable and stringstream object
     stringstream ss;
