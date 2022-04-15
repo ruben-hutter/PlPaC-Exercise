@@ -26,7 +26,7 @@ Complex mult(Complex first, Complex second) {
 
 // function for dividing two complex numbers
 Complex div(Complex first, Complex second) {
-	double real_part = (((first.real) * (second.real)) + ((first.imag) * (second.imag))) / (pow(second.real, 2) + pow(second.real, 2));
+	double real_part = (((first.real) * (second.real)) + ((first.imag) * (second.imag))) / (pow(second.real, 2) + pow(second.imag, 2));
 	double imag_part = (((second.real) * (first.imag)) - ((first.real) * (second.imag))) / (pow(second.real, 2) + pow(second.imag,2));
 	return Complex{real_part, imag_part};
 }
@@ -34,11 +34,11 @@ Complex div(Complex first, Complex second) {
 int main() {
 	// init complex numbers
 	Complex a, b, c, d, result;
-	a = {1.0, 5.0};
-	b = {2.0, 2.0};
+	a = {1, 5};
+	b = {5, 3};
 	c = {2, -3};
 	d = {2, -4};
 	// run calculation example from exercise
-	result = add(a, b);
-	printf("(%d + %di)", result.real, result.imag);
+	result = subtract(a, div(add(b, c), d));
+	printf("The result is: (%f + %fi)\n", result.real, result.imag);
 }
