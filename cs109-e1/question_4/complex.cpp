@@ -1,7 +1,7 @@
 #include <cstdio>
 #include <math.h>
 
-// struct for representing copmlex numbers
+// struct for representing complex numbers
 typedef struct Complex {
 	double real;
 	double imag;
