@@ -31,7 +31,7 @@ void canidsCommonName(Canids c) {
 
 int main() {
 	Canids c = Canis_Familiaris;
-	//canidsCommonName(c);
+	canidsCommonName(c);
 	return 0;
 }
 
