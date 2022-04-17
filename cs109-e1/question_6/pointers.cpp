@@ -6,7 +6,7 @@ double square (double gaga) {
 	return gaga * gaga;
 }
 
-// as the input should be increased by  0.3 we need double or flot as return type
+// as the input should be increased by 0.3 we need double or flot as return type
 double incr (double inp) {
 	return inp + 0.3;
 }
