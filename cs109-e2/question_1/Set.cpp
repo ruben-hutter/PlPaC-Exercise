@@ -13,7 +13,7 @@ int Set::add(double x, double y, string name, int id)
 			return 0;
 		}
 	}
-	entryList.push_front(entry);
+	entryList.push_back(entry);
 	//sort();
 	return 1;
 }
@@ -63,6 +63,7 @@ void Set::sort(int sort_type, bool reorganize)
 // print all entries to sdt::cout
 void Set::print()
 {
+	std::cout << "The set contains the following elements:" << endl;
 	for (Entry e : entryList)
 	{
 		std::cout << "(" << e.uid << ", " << e.firstFloat << ", " << e.secondFloat << ", " << e.entryString << "),";

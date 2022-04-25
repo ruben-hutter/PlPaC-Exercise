@@ -15,19 +15,19 @@ int main ()
 
     cout << "rint n sort";
     testset.print();
-    /**
+
     testset.sort();
 
     cout << "test contains";
-    cout << testset.contains(1);
+    cout << testset.contains(0);
     cout << testset.contains(5);
 
     cout << "test remove";
-    testset.remove(1);
+    testset.remove(0);
 
     testset.print();
 
     cout << "test size";
     cout << testset.size();
-	**/
+
 }
