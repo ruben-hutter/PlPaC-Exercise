@@ -18,6 +18,12 @@ public:
 		float firstFloat;
 		float secondFloat;
 		string entryString;
+        bool operator <(const Entry &entry)
+        {
+            float entryNorm = sqrt(entry.firstFloat*entry.firstFloat + entry.secondFloat*entry.secondFloat);
+			float ownNorm = sqrt(firstFloat*firstFloat + secondFloat*secondFloat);
+			return entryNorm < ownNorm;
+        }
 	} entry;
 
 	// adds element to list

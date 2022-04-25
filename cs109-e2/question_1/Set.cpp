@@ -57,11 +57,7 @@ unsigned int Set::size()
 // sort elems by norm
 void Set::sort(int sort_type, bool reorganize)
 {
-	std::sort(entryList.begin(), entryList.end(), [](const Entry &first, const Entry &second)
-			  {
-			float n1 = sqrt(first.firstFloat*first.firstFloat + first.secondFloat*first.secondFloat);
-			float n2 = sqrt(second.firstFloat*second.firstFloat + second.secondFloat*second.secondFloat);
-			return n1 < n2; });
+	entryList.sort();
 }
 
 // print all entries to sdt::cout
