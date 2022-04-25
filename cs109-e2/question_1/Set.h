@@ -17,7 +17,7 @@ public:
 		int uid;
 		float firstFloat;
 		float secondFloat;
-		string string;
+		string entryString;
 	} entry;
 
 	// adds element to list
