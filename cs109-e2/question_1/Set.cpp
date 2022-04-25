@@ -3,6 +3,7 @@
 #include <list>
 #include <string>
 #include <cmath>
+#include <Set.h>
 using namespace std;
 
 class Set
@@ -60,11 +61,9 @@ class Set
 			if (e.uid == id)
 			{
 				return 1;
-				{
-				}
-				return 0;
 			}
 		}
+		return 0;
 	}
 
 	// return number of elements in list
