@@ -7,7 +7,7 @@ int main ()
 {
     cout << "creating set";
 	Set testset;
-    
+
     cout << "pop'ing set";
     testset.add(1.1, 2.2, "test0", 0);
     testset.add(2.2, 4.4, "test1", 1);
@@ -15,7 +15,7 @@ int main ()
 
     cout << "rint n sort";
     testset.print();
-
+    /**
     testset.sort();
 
     cout << "test contains";
@@ -29,4 +29,5 @@ int main ()
 
     cout << "test size";
     cout << testset.size();
+	**/
 }
