@@ -1,8 +1,3 @@
-#include <algorithm>
-#include <iostream>
-#include <list>
-#include <string>
-#include <cmath>
 #include <Set.h>
 using namespace std;
 

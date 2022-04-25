@@ -1,5 +1,12 @@
 #ifndef SET_H
 #define SET_H
+#include <string>
+#include <algorithm>
+#include <iostream>
+#include <list>
+#include <cmath>
+
+using namespace std;
 
 class Set
 {
