@@ -19,10 +19,10 @@ public:
 		float firstFloat;
 		float secondFloat;
 		string entryString;
-        bool operator <(const Entry &entry)
+        bool operator< (const Entry &entry)
         {
-            float entryNorm = sqrt(entry.firstFloat*entry.firstFloat + entry.secondFloat*entry.secondFloat);
-			float ownNorm = sqrt(firstFloat*firstFloat + secondFloat*secondFloat);
+            float entryNorm = sqrt(pow(entry.firstFloat, 2) + pow(entry.secondFloat, 2)); //sqrt(entry.firstFloat*entry.firstFloat + entry.secondFloat*entry.secondFloat);
+			float ownNorm = sqrt(pow(firstFloat, 2) + pow(secondFloat, 2)); //sqrt(firstFloat*firstFloat + secondFloat*secondFloat);
 			return entryNorm < ownNorm;
         }
 	} entry;

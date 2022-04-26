@@ -29,5 +29,4 @@ int main ()
 
     cout << "test size";
     cout << testset.size();
-
 }

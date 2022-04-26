@@ -12,6 +12,7 @@ int Set::add(double x, double y, string name, int id)
 		{
 			return 0;
 		}
+		++it; // was missing?
 	}
 	entryList.push_back(entry);
 	//sort();
@@ -72,4 +73,5 @@ void Set::print()
 
 void Set::destroy()
 {
+	// TODO i guess...
 }
