@@ -1,17 +1,54 @@
 #ifndef DYNAMIC_ARRAY_H
 #define DYNAMIC_ARRAY_H
 
+#include <cmath>
+#include <iostream>
+#include <queue>
+using namespace std;
+
+class BufferedChange {
+private:
+    // operation to apply to value and element
+    int op;
+    // operand to apply operator to
+    int* operand;
+    // value in array to apply operator to
+    int value;
+    // gets the current value of the element in the array
+    int getValueOf(int* operand);
+    // applies the add operator
+    int add();
+    // applies the subtract aoperator
+    int subtract();
+    // aplies the multiplication operator
+    int multiply();
+    // applies the division multiplicator
+    int divide();
+    // enum storing all available operations
+    enum Operator {ADD = 0, SUBTRACT = 1, MULT = 2, DIV = 3};
+
+public:
+    // constructor
+    BufferedChange();
+    // deconstructor
+    ~BufferedChange();
+    // executes the buffered change
+    void execute();
+};
+
 class DynamicArray {
     private:
         float ALLOC_SIZE = 5/4.0f;
         float FREE_SIZE = 1/2.0f;
+        float TRIM_SIZE = 3/2.0f;
+        int DEFAULT_SIZE = 10;
 
     public:
         DynamicArray::DynamicArray(int initialSize);
         DynamicArray::~DynamicArray();
 
         // return element
-        int get();
+        int get(int index);
 
         // change element
         void set(int position, int element);
@@ -32,12 +69,34 @@ class DynamicArray {
         void shrink();
     
     private:
-        DynamicArray* data_ptr;
+        int* data_ptr;
         int size;
         int avail;
         // priority list
-        Buffer* buffer;
-        access;
+        std::priority_queue<BufferedChange> buffer;
+        //access tuple;
+        //TODO: put 10 of these in an normal array refd by "access_ptr" 
+        //std::tuple<int,int,int> access_array_element_TODO_thing;
 };
 
 #endif
+
+/** TODO
+ * [ ] init buffer in dynamic array constructor
+ * [ ] find out what ddatatypes are needed in the tuple at L78
+ *      related info:
+ *      an access pointer field (static array of tuples of elements with changes buffered
+ *      and a direct link to the its latest value or relevant sequence of changes in the
+ *      buffer
+ * 
+ *      The access list is a list of tuples, an element identifier (pointer or number) and
+ *      a pointer to the most recent value of/sequence of changes to that element.
+ *      The access list has 10 entries, which is the maximum allowed number of buffered
+ *      changes.
+ * [ ] create static array of size 10 of the required tuple (see above)
+ * [ ] init access tuple thing in dyn. arr. constructor
+ * [ ] implement buffering into set method
+ * [ ] implement get value (ref to exercise p.6)
+ * [ ] implement function in buffer change
+ * [ ] some more stuff we'll find out later
+ **/
