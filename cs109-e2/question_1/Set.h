@@ -21,14 +21,14 @@ public:
 		string entryString;
         bool operator< (const Entry &entry)
         {
-            float entryNorm = sqrt(pow(entry.firstFloat, 2) + pow(entry.secondFloat, 2)); //sqrt(entry.firstFloat*entry.firstFloat + entry.secondFloat*entry.secondFloat);
-			float ownNorm = sqrt(pow(firstFloat, 2) + pow(secondFloat, 2)); //sqrt(firstFloat*firstFloat + secondFloat*secondFloat);
-			return entryNorm < ownNorm;
+            float entryNorm = sqrt(pow(entry.firstFloat, 2) + pow(entry.secondFloat, 2));
+			float ownNorm = sqrt(pow(firstFloat, 2) + pow(secondFloat, 2));
+			return entryNorm > ownNorm;
         }
 	} entry;
 
 	// adds element to list
-	int add(double x, double y, string name, int id = -1);
+	int add(float x, float y, string name, int id = -1);
 
 	// removes the element with the specified id
 	int remove(int id);

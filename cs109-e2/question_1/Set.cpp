@@ -2,7 +2,7 @@
 using namespace std;
 
 // adds element to list
-int Set::add(double x, double y, string name, int id)
+int Set::add(float x, float y, string name, int id)
 {
 	Entry entry = {id, x, y, name};
 	list<Entry>::iterator it = entryList.begin();
@@ -12,10 +12,10 @@ int Set::add(double x, double y, string name, int id)
 		{
 			return 0;
 		}
-		++it; // was missing?
+		++it;
 	}
 	entryList.push_back(entry);
-	//sort();
+	sort();
 	return 1;
 }
 
