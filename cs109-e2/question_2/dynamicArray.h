@@ -37,7 +37,7 @@ class DynamicArray {
         int avail;
         // priority list
         Buffer* buffer;
-        access;
+        int* access;
 };
 
 #endif
