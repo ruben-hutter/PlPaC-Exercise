@@ -33,3 +33,13 @@ void DynamicArray::remove() {
 void DynamicArray::trim(){
 
 }
+
+// increases the memory by the specified value
+void DynamicArray::grow(){
+
+}
+
+// decreases the memory by the specified value
+void DynamicArray::shrink(){
+
+}
