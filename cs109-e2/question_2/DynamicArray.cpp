@@ -1,5 +1,5 @@
 // dynamic array implementation
-#include "dynamicArray.h"
+#include "DynamicArray.h"
 
 DynamicArray::DynamicArray(int initialSize) {
     if (initialSize > 0) {
