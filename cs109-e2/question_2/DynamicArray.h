@@ -3,7 +3,8 @@
 
 #include <cmath>
 #include <iostream>
-#include <queue>
+#include <array>
+#include <list>
 using namespace std;
 
 class BufferedChange {
@@ -49,40 +50,37 @@ class DynamicArray {
 
         // return element
         int get(int index);
-
         // change element
         void set(int position, int element);
-
         // add an element
         void add(int element);
-
         // remove element
         void remove();
-
         // executes the buffered changes at sets the available memory to 3/2
         void trim();
-
         // allocate memory 5/4 size
         void grow();
-
         // free memory size/2
         void shrink();
     
     private:
+        // pointer to dynamic array
         int* data_ptr;
+        // number of elements in dynamic array
         int size;
+        // size/length of dynamic array
         int avail;
-        // priority list
-        std::priority_queue<BufferedChange> buffer;
-        //access tuple;
-        //TODO: put 10 of these in an normal array refd by "access_ptr" 
-        //std::tuple<int,int,int> access_array_element_TODO_thing;
+        // linked list
+        std::list<BufferedChange> buffer;
+        //access tuple
+        typedef std::tuple<int*, int*> access_tuple;
+        std::array<access_tuple, 10> access_array;
 };
 
 #endif
 
 /** TODO
- * [ ] init buffer in dynamic array constructor
+ * [x] init buffer in dynamic array constructor
  * [ ] find out what ddatatypes are needed in the tuple at L78
  *      related info:
  *      an access pointer field (static array of tuples of elements with changes buffered
@@ -93,10 +91,10 @@ class DynamicArray {
  *      a pointer to the most recent value of/sequence of changes to that element.
  *      The access list has 10 entries, which is the maximum allowed number of buffered
  *      changes.
- * [ ] create static array of size 10 of the required tuple (see above)
- * [ ] init access tuple thing in dyn. arr. constructor
- * [ ] implement buffering into set method
- * [ ] implement get value (ref to exercise p.6)
- * [ ] implement function in buffer change
- * [ ] some more stuff we'll find out later
+ * [x] create static array of size 10 of the required tuple (see above)
+ * [] init access tuple thing in dyn. arr. constructor
+ * [] implement buffering into set method
+ * [] implement get value (ref to exercise p.6)
+ * [] implement function in buffer change
+ * [] some more stuff we'll find out later
  **/
