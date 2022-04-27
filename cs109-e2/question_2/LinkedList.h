@@ -4,12 +4,15 @@
 class LinkedList
 {
     private:
-        struct Node
-        {
+        struct Node {
             BufferedChange bufferedChange;
             struct Node* next;
+            struct Node* prev;
         };
-        Node* head;
+        // head of list
+        struct Node* head;
+        // tail of list
+        struct Node* tail;
 
     public:
         // constructor
@@ -20,7 +23,7 @@ class LinkedList
         // append node at the end of an element related sequence
         // of operations and returns the pointer to the beginning
         // of this sequence. [A,A,B,C] -> append(A), return ptr to A[0]
-        Node* append(Node n);
+        Node* append(BufferedChange* buff_change);
         // overwrite buffered change sequenze of element, and becomes
         // first of sequence.
         void overwrite();
@@ -29,6 +32,10 @@ class LinkedList
         // function that returns the value of an element that it
         // would have, if the buffered changes would be applied.
         int getValueOf();
+
+    private:
+        // append to tail
+        void appendTail(BufferedChange* buff_change);
 };
 
 #endif

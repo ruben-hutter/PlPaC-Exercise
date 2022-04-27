@@ -3,13 +3,14 @@
 
 DynamicArray::DynamicArray(int initialSize)
 {
+    // initialize dynamic array of data
     if (initialSize < 0)
     {
         data_ptr = new int[DEFAULT_SIZE];
         return;
     }
     data_ptr = new int[initialSize];
-    // initialize access
+    // initialize access index to first free position
     position_in_access = 0;
 }
 
@@ -18,7 +19,7 @@ DynamicArray::~DynamicArray()
     delete[] data_ptr;
 }
 
-// gets specified element
+// gets specified element most recent value
 int DynamicArray::get(int index)
 {
     if (index < 0 || index >= size)
@@ -27,10 +28,10 @@ int DynamicArray::get(int index)
     }
     // check if element in access
     for (access_tuple at : access_array) {
-        int* elem_ptr_arr = std::get<0>(at);
-        if (elem_ptr_arr == &data_ptr[index]) {
+        int* elem_arr_ptr = at.elem_arr_ptr;
+        if (elem_arr_ptr == &data_ptr[index]) {
             // iterate over buffer and return value for element
-            return DynamicArray::getValueBuff(std::get<1>(at));
+            return DynamicArray::getValueBuff(at.elem_buff_ptr);
         }
     }
     // get elem from dyn array
@@ -38,7 +39,7 @@ int DynamicArray::get(int index)
 }
 
 // gets element in buffer
-int DynamicArray::getValueBuff(int* elem_ptr_buff)
+int DynamicArray::getValueBuff(int* elem_buff_ptr)
 {
     int value;
     // start by elem_ptr_buff
@@ -54,25 +55,24 @@ void DynamicArray::set(int index, BufferedChange::Operator op, int value)
     }
     // create new buffered change
     BufferedChange* bc = new BufferedChange(&data_ptr[index], op, value);
-    // put change in buffer
-    appendToBuffer(bc);
-    // create access entry if not already contained ()
-    int found = 0;
-    for (int i = 0; i < 10; i++) {
-        if (bc->operand != &data_ptr[index]) {
-            continue;
+    // put change in buffer and get sequence ptr in buffer
+    int* elem_buff_ptr = buffer.append(bc)->bufferedChange.operand;
+    // create access entry if not already contained
+    bool found = false;
+    for (int i = 0; i < position_in_access; i++) {
+        int* elem_arr_ptr = access_array[i].elem_arr_ptr;
+        if (elem_arr_ptr == &data_ptr[index]) {
+            found = true;
         }
-        found = 1;
     }
-    if (found != 0) {
-        
-        access_array[position_in_access] = 
+    if (!found) {
+        // new access_tuple for elem
+        access_tuple at;
+        at.elem_arr_ptr = &data_ptr[index];
+        at.elem_buff_ptr = elem_buff_ptr;
+        // add access_tuple to access_array and increment position
+        access_array[position_in_access++] = at;
     }
-}
-
-// appends the specified change to the buffer
-void DynamicArray::appendToBuffer(BufferedChange* change) {
-
 }
 
 // add an element

@@ -83,17 +83,14 @@ class DynamicArray
         // linked list buffer
         LinkedList buffer;
         // access tuple: <elem_arr_ptr, elem_buff_ptr>
-        typedef struct
-        {
+        typedef struct access_tuple {
             int* elem_arr_ptr;
             int* elem_buff_ptr;
-        } access_tuple;
+        };
         // access array for fast access to buffer elements
         access_tuple access_array[DEFAULT_SIZE];
         // first free position in access
         int position_in_access;
-        // append value to buffer
-        void appendToBuffer(BufferedChange* change);
 };
 
 #endif

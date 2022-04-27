@@ -5,6 +5,7 @@ LinkedList::LinkedList()
 {
     Node zero_op;
     head = &zero_op;
+    tail = &zero_op;
 }
 
 // destructor
@@ -16,15 +17,38 @@ LinkedList::~LinkedList()
 // append node at the end of an element related sequence
 // of operations and returns the pointer to the beginning
 // of this sequence. [A,A,B,C] -> append(A), return ptr to A[0]
-LinkedList::Node* LinkedList::append(LinkedList::Node n)
+LinkedList::Node* LinkedList::append(BufferedChange* buff_change)
 {
     // TODO
-    return NULL;
+    Node* actual_sequence_start_node;
+    // 1. check if elem in access
+    // 2a. if so start iterating buffer from elem_buff_ptr
+    //     and append to the end of sequence the new buff_change
+    // 2b. if not append to tail and add to access_array
+    //     -> appendTail()
+
+    Node* tmp = new Node;
+    tmp->next = NULL;
+
+    tail->next = tmp;
+    tail = tail->next;
+    return actual_sequence_start_node;
 }
 
 // overwrite buffered change sequenze of element, and becomes
 // first of sequence.
-void LinkedList::overwrite()
+void LinkedList::overwrite(BufferedChange* buff_change)
+{
+    // TODO
+    // 1. check if elem in access (check if in buffer)
+    // 2a. link prev of sequence start to new buff_change, and next of
+    //     new buff_change to first elem of next sequence (see access_array)
+    // 2b. if not, append to tail and add to access_array
+    //     -> appendTail()
+}
+
+// append to tail
+void LinkedList::appendTail(BufferedChange* buff_change)
 {
     // TODO
 }
