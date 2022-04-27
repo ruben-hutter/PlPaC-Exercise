@@ -70,13 +70,11 @@ class DynamicArray {
         int size;
         // size/length of dynamic array
         int avail;
-        // priority list
+        // linked list
         std::list<BufferedChange> buffer;
         //access tuple
         typedef std::tuple<int*, int*> access_tuple;
         std::array<access_tuple, 10> access_array;
-        //TODO: put 10 of these in a normal array refd by "access_ptr" 
-        //std::tuple<int,int,int> access_array_element_TODO_thing;
 };
 
 #endif
