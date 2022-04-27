@@ -34,7 +34,7 @@ public:
     // deconstructor
     ~BufferedChange();
     // executes the buffered change
-    void execute(int op, int value, int* operand);
+    void execute();
 };
 
 class DynamicArray {
@@ -80,7 +80,7 @@ class DynamicArray {
 #endif
 
 /** TODO
- * [ ] init buffer in dynamic array constructor
+ * [x] init buffer in dynamic array constructor
  * [ ] find out what ddatatypes are needed in the tuple at L78
  *      related info:
  *      an access pointer field (static array of tuples of elements with changes buffered
@@ -91,10 +91,10 @@ class DynamicArray {
  *      a pointer to the most recent value of/sequence of changes to that element.
  *      The access list has 10 entries, which is the maximum allowed number of buffered
  *      changes.
- * [ ] create static array of size 10 of the required tuple (see above)
- * [ ] init access tuple thing in dyn. arr. constructor
- * [ ] implement buffering into set method
- * [ ] implement get value (ref to exercise p.6)
- * [ ] implement function in buffer change
- * [ ] some more stuff we'll find out later
+ * [x] create static array of size 10 of the required tuple (see above)
+ * [] init access tuple thing in dyn. arr. constructor
+ * [] implement buffering into set method
+ * [] implement get value (ref to exercise p.6)
+ * [] implement function in buffer change
+ * [] some more stuff we'll find out later
  **/
