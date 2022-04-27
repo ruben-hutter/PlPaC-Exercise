@@ -27,14 +27,14 @@ private:
     int divide();
 
 public:
+    // enum storing all available operations
+    enum Operator {ADD = 0, SUBTRACT = 1, MULT = 2, DIV = 3};
     // constructor
     BufferedChange(int* operand, BufferedChange::Operator op, int value);
     // deconstructor
     ~BufferedChange();
     // executes the buffered change
     void execute();
-    // enum storing all available operations
-    enum Operator {ADD = 0, SUBTRACT = 1, MULT = 2, DIV = 3};
     // operation to apply to value and element
     int op;
     // operand to apply operator to
@@ -80,7 +80,7 @@ class DynamicArray {
         std::list<BufferedChange> buffer;
         // access tuple: <ptr_elem_dyn_arr, ptr_elem_buff>
         typedef std::tuple<int*, int*> access_tuple;
-        std::array<access_tuple, DynamicArray::DEFAULT_SIZE> access_array;
+        std::array<access_tuple, 10> access_array;
         // first free position in access
         int position_in_access;
         // append value to buffer
