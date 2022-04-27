@@ -110,27 +110,58 @@ void DynamicArray::shrink()
     }
 }
 
-// gets the current value of the element in the array
-int BufferedChange::getValueOf(int *operand) {
+// constructor
+BufferedChange::BufferedChange() {
 
+}
+
+// deconstructor
+BufferedChange::~BufferedChange() {
+
+}
+
+// gets the current value of the element in the array
+int BufferedChange::getValueOf()
+{
+    switch (op)
+    {
+    case 1:
+        return add();
+    case 2:
+        return subtract();
+    case 3:
+        return multiply();
+    case 4:
+        return divide();
+        return NULL;
+    }
+}
+
+// executes the buffered change
+void BufferedChange::execute() {
+    *operand = getValueOf();
 }
 
 // applies the add operator
-int BufferedChange::add() {
-
+int BufferedChange::add()
+{
+    return *operand + value;
 }
 
 // applies the subtract aoperator
-int BufferedChange::subtract() {
-
+int BufferedChange::subtract()
+{
+    return *operand - value;
 }
 
 // aplies the multiplication operator
-int BufferedChange::multiply() {
-
+int BufferedChange::multiply()
+{
+    return *operand * value;
 }
 
 // applies the division multiplicator
-int BufferedChange::divide() {
-
+int BufferedChange::divide()
+{
+    return *operand / value;
 }
