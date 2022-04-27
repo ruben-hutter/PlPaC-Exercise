@@ -57,7 +57,11 @@ class DynamicArray {
         // return element
         int get(int index);
         // change element
+<<<<<<< HEAD
         void set(int index, BufferedChange::Operator op, int value);
+=======
+        void set(int index, BufferedChange::Operator operator, int value);
+>>>>>>> af0d7d6003a8f904084d3514920558383011ae3a
         // add an element
         void add(int element);
         // remove element
