@@ -6,6 +6,7 @@
 using namespace std;
 
 class Data {
+public:
     std::list<ElementType> data_list;
     ElementType get(int uid);
     void remove(int uid);
