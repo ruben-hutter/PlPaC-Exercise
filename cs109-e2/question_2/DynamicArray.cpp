@@ -165,3 +165,9 @@ int BufferedChange::divide()
 {
     return *operand / value;
 }
+
+/** TODO 
+ * [] set()
+ * [] get()
+ * [] 
+ */
