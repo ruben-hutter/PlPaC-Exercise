@@ -4,17 +4,19 @@
 class LinkedList
 {
     private:
-        struct Node {
-            BufferedChange bufferedChange;
-            struct Node* next;
-            struct Node* prev;
-        };
         // head of list
         struct Node* head;
         // tail of list
         struct Node* tail;
 
     public:
+        // node of linked list
+        struct Node
+        {
+            BufferedChange::BufferedChange bufferedChange;
+            struct Node* next;
+            struct Node* prev;
+        };
         // constructor
         LinkedList();
         // destructor
@@ -31,7 +33,7 @@ class LinkedList
         void execute();
         // function that returns the value of an element that it
         // would have, if the buffered changes would be applied.
-        int getValueOf();
+        int getValueOf(Node* elem_buff_ptr);
 
     private:
         // append to tail

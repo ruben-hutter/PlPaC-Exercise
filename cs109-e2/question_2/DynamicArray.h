@@ -58,8 +58,6 @@ class DynamicArray
 
         // return element
         int get(int index);
-        // return value of element
-        int getValueBuff(int* elem_ptr_buff);
         // change element
         void set(int index, BufferedChange::Operator op, int value);
         // add an element
@@ -83,9 +81,10 @@ class DynamicArray
         // linked list buffer
         LinkedList buffer;
         // access tuple: <elem_arr_ptr, elem_buff_ptr>
-        typedef struct access_tuple {
+        typedef struct access_tuple
+        {
             int* elem_arr_ptr;
-            int* elem_buff_ptr;
+            LinkedList::Node* elem_buff_ptr;
         };
         // access array for fast access to buffer elements
         access_tuple access_array[DEFAULT_SIZE];
@@ -94,23 +93,3 @@ class DynamicArray
 };
 
 #endif
-
-/** TODO
- * [x] init buffer in dynamic array constructor
- * [ ] find out what ddatatypes are needed in the tuple at L78
- *      related info:
- *      an access pointer field (static array of tuples of elements with changes buffered
- *      and a direct link to the its latest value or relevant sequence of changes in the
- *      buffer
- * 
- *      The access list is a list of tuples, an element identifier (pointer or number) and
- *      a pointer to the most recent value of/sequence of changes to that element.
- *      The access list has 10 entries, which is the maximum allowed number of buffered
- *      changes.
- * [x] create static array of size 10 of the required tuple (see above)
- * [] init access tuple thing in dyn. arr. constructor
- * [] implement buffering into set method
- * [] implement get value (ref to exercise p.6)
- * [] implement function in buffer change
- * [] some more stuff we'll find out later
- **/

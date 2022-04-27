@@ -3,9 +3,9 @@
 // constructor: initialize list with 0-operation as root/head
 LinkedList::LinkedList()
 {
-    Node zero_op;
-    head = &zero_op;
-    tail = &zero_op;
+    Node* zero_op = new Node;
+    head = zero_op;
+    tail = zero_op;
 }
 
 // destructor
@@ -61,7 +61,12 @@ void LinkedList::execute()
 
 // function that returns the value of an element that it
 // would have, if the buffered changes would be applied.
-int LinkedList::getValueOf()
+int LinkedList::getValueOf(Node* elem_buff_ptr)
 {
     // TODO
+    int value;
+    Node actual_elem;
+    // iterate from elem_buff_ptr to end of sequence
+    // and update value
+    return value;
 }

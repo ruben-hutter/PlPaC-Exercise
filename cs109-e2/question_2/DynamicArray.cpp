@@ -27,45 +27,42 @@ int DynamicArray::get(int index)
         return NULL;
     }
     // check if element in access
-    for (access_tuple at : access_array) {
-        int* elem_arr_ptr = at.elem_arr_ptr;
-        if (elem_arr_ptr == &data_ptr[index]) {
+    for (int i = 0; i < position_in_access; i++)
+    {
+        int* elem_arr_ptr = access_array[i].elem_arr_ptr;
+        if (elem_arr_ptr == &data_ptr[index])
+        {
             // iterate over buffer and return value for element
-            return DynamicArray::getValueBuff(at.elem_buff_ptr);
+            return buffer.getValueOf(access_array[i].elem_buff_ptr);
         }
     }
     // get elem from dyn array
     return data_ptr[index];
 }
 
-// gets element in buffer
-int DynamicArray::getValueBuff(int* elem_buff_ptr)
-{
-    int value;
-    // start by elem_ptr_buff
-    // iterate over buff until other elem
-    return value;
-}
-
 // change element
 void DynamicArray::set(int index, BufferedChange::Operator op, int value)
 {
-    if (index < 0 || index >= size) {
+    if (index < 0 || index >= size)
+    {
         return;
     }
     // create new buffered change
     BufferedChange* bc = new BufferedChange(&data_ptr[index], op, value);
     // put change in buffer and get sequence ptr in buffer
-    int* elem_buff_ptr = buffer.append(bc)->bufferedChange.operand;
+    LinkedList::Node* elem_buff_ptr = buffer.append(bc);
     // create access entry if not already contained
     bool found = false;
-    for (int i = 0; i < position_in_access; i++) {
+    for (int i = 0; i < position_in_access; i++)
+    {
         int* elem_arr_ptr = access_array[i].elem_arr_ptr;
-        if (elem_arr_ptr == &data_ptr[index]) {
+        if (elem_arr_ptr == &data_ptr[index])
+        {
             found = true;
         }
     }
-    if (!found) {
+    if (!found)
+    {
         // new access_tuple for elem
         access_tuple at;
         at.elem_arr_ptr = &data_ptr[index];
@@ -79,8 +76,7 @@ void DynamicArray::set(int index, BufferedChange::Operator op, int value)
 void DynamicArray::add(int element)
 {
     grow();
-    data_ptr[size] = element;
-    size++;
+    data_ptr[size++] = element;
 }
 
 // remove element form the end of the array
@@ -99,6 +95,7 @@ void DynamicArray::remove()
 // executes the buffered changes at sets the available memory to 3/2
 void DynamicArray::trim()
 {
+    // TODO
     // exec all buffer changes
 }
 
@@ -111,9 +108,9 @@ void DynamicArray::grow()
         trim();
         // alloc space for new array
         int new_size = ceil(ALLOC_SIZE * avail);
-        int *new_arr = new int[new_size];
+        int* new_arr = new int[new_size];
         // copy data
-        for (int i = 0; i < avail; i = i++)
+        for (int i = 0; i < avail; i++)
         {
             new_arr[i] = data_ptr[i];
         }
@@ -133,9 +130,9 @@ void DynamicArray::shrink()
         trim();
         // alloc space for new array
         int new_size = ceil(FREE_SIZE * avail);
-        int *new_arr = new int[new_size];
+        int* new_arr = new int[new_size];
         // copy data
-        for (int i = 0; i < avail; i = i++)
+        for (int i = 0; i < avail; i++)
         {
             new_arr[i] = data_ptr[i];
         }
@@ -147,14 +144,17 @@ void DynamicArray::shrink()
 }
 
 // constructor
-BufferedChange::BufferedChange(int* operand, Operator op, int value) {
+BufferedChange::BufferedChange(int* operand, Operator op, int value)
+{
     BufferedChange::operand = operand;
     BufferedChange::op = op;
     BufferedChange::value = value;
 }
 
 // deconstructor
-BufferedChange::~BufferedChange() {
+BufferedChange::~BufferedChange()
+{
+    // TODO
 }
 
 // gets the current value of the element in the array
@@ -175,7 +175,8 @@ int BufferedChange::getValueOf()
 }
 
 // executes the buffered change
-void BufferedChange::execute() {
+void BufferedChange::execute()
+{
     *operand = getValueOf();
 }
 
