@@ -3,7 +3,8 @@
 
 #include <cmath>
 #include <iostream>
-#include <queue>
+#include <array>
+#include <list>
 using namespace std;
 
 class BufferedChange {
@@ -33,7 +34,7 @@ public:
     // deconstructor
     ~BufferedChange();
     // executes the buffered change
-    void execute();
+    void execute(int op, int value, int* operand);
 };
 
 class DynamicArray {
@@ -49,33 +50,32 @@ class DynamicArray {
 
         // return element
         int get(int index);
-
         // change element
         void set(int position, int element);
-
         // add an element
         void add(int element);
-
         // remove element
         void remove();
-
         // executes the buffered changes at sets the available memory to 3/2
         void trim();
-
         // allocate memory 5/4 size
         void grow();
-
         // free memory size/2
         void shrink();
     
     private:
+        // pointer to dynamic array
         int* data_ptr;
+        // number of elements in dynamic array
         int size;
+        // size/length of dynamic array
         int avail;
         // priority list
-        std::priority_queue<BufferedChange> buffer;
-        //access tuple;
-        //TODO: put 10 of these in an normal array refd by "access_ptr" 
+        std::list<BufferedChange> buffer;
+        //access tuple
+        typedef std::tuple<int*, int*> access_tuple;
+        std::array<access_tuple, 10> access_array;
+        //TODO: put 10 of these in a normal array refd by "access_ptr" 
         //std::tuple<int,int,int> access_array_element_TODO_thing;
 };
 
