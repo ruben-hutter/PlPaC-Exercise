@@ -25,7 +25,7 @@ int DynamicArray::get(int index)
     }
     // check if element in access
     for (access_tuple at : access_array) {
-        if (std::get<0>(at) == data_ptr[index]) {
+        if (*std::get<0>(at) == data_ptr[index]) {
         }
     }
     // iterate over buffer with get value of

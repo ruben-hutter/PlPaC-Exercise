@@ -5,6 +5,7 @@
 #include <iostream>
 #include <array>
 #include <list>
+#include <tuple>
 using namespace std;
 
 class BufferedChange {
@@ -49,6 +50,21 @@ class DynamicArray {
         float FREE_SIZE = 1/2.0f;
         float TRIM_SIZE = 3/2.0f;
         int DEFAULT_SIZE = 10;
+        // pointer to dynamic array
+        int* data_ptr;
+        // number of elements in dynamic array
+        int size;
+        // size/length of dynamic array
+        int avail;
+        // linked list
+        std::list<BufferedChange> buffer;
+        // access tuple: <ptr_elem_dyn_arr, ptr_elem_buff>
+        typedef std::tuple<int*, int*> access_tuple;
+        std::array<access_tuple, DEFAULT_SIZE> access_array;
+        // first free position in access
+        int position_in_access;
+        // append value to buffer
+        void appendToBuffer(BufferedChange* change);
 
     public:
         DynamicArray::DynamicArray(int initialSize);
@@ -70,21 +86,6 @@ class DynamicArray {
         void shrink();
     
     private:
-        // pointer to dynamic array
-        int* data_ptr;
-        // number of elements in dynamic array
-        int size;
-        // size/length of dynamic array
-        int avail;
-        // linked list
-        std::list<BufferedChange> buffer;
-        // access tuple: <ptr_elem_dyn_arr, ptr_elem_buff>
-        typedef std::tuple<int*, int*> access_tuple;
-        std::array<access_tuple, 10> access_array;
-        // first free position in access
-        int position_in_access;
-        // append value to buffer
-        void appendToBuffer(BufferedChange* change);
 };
 
 #endif
