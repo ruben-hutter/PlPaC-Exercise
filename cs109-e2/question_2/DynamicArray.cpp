@@ -3,12 +3,14 @@
 
 DynamicArray::DynamicArray(int initialSize)
 {
-    if (initialSize > 0)
+    if (initialSize < 0)
     {
-        data_ptr = new int[initialSize];
+        data_ptr = new int[DEFAULT_SIZE];
         return;
     }
-    data_ptr = new int[DEFAULT_SIZE];
+    data_ptr = new int[initialSize];
+    // initialize access
+    position_in_access = 0;
 }
 
 DynamicArray::~DynamicArray()
@@ -25,14 +27,23 @@ int DynamicArray::get(int index)
     }
     // check if element in access
     for (access_tuple at : access_array) {
-        if (*std::get<0>(at) == data_ptr[index]) {
+        int* elem_ptr_arr = std::get<0>(at);
+        if (elem_ptr_arr == &data_ptr[index]) {
+            // iterate over buffer and return value for element
+            return DynamicArray::getValueBuff(std::get<1>(at));
         }
     }
-    // iterate over buffer with get value of
-    // return
-    // ELSE
     // get elem from dyn array
     return data_ptr[index];
+}
+
+// gets element in buffer
+int DynamicArray::getValueBuff(int* elem_ptr_buff)
+{
+    int value;
+    // start by elem_ptr_buff
+    // iterate over buff until other elem
+    return value;
 }
 
 // change element
@@ -137,12 +148,13 @@ void DynamicArray::shrink()
 
 // constructor
 BufferedChange::BufferedChange(int* operand, Operator op, int value) {
-    value = 0;
+    BufferedChange::operand = operand;
+    BufferedChange::op = op;
+    BufferedChange::value = value;
 }
 
 // deconstructor
 BufferedChange::~BufferedChange() {
-
 }
 
 // gets the current value of the element in the array
@@ -190,8 +202,3 @@ int BufferedChange::divide()
 {
     return *operand / value;
 }
-
-/** TODO 
- * [] set()
- * [] get()
- */

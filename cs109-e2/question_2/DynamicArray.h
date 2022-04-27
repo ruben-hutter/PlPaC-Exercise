@@ -1,77 +1,65 @@
 #ifndef DYNAMIC_ARRAY_H
 #define DYNAMIC_ARRAY_H
 
+#include "LinkedList.h"
 #include <cmath>
 #include <iostream>
-#include <array>
-#include <list>
-#include <tuple>
+
 using namespace std;
 
-class BufferedChange {
-private:
-    // operation to apply to value and element
-    int op;
-    // operand to apply operator to
-    int* operand;
-    // value in array to apply operator to
-    int value;
-    // gets the current value of the element in the array
-    int getValueOf();
-    // applies the add operator
-    int add();
-    // applies the subtract aoperator
-    int subtract();
-    // aplies the multiplication operator
-    int multiply();
-    // applies the division multiplicator
-    int divide();
-
-public:
-    // enum storing all available operations
-    enum Operator {ADD = 0, SUBTRACT = 1, MULT = 2, DIV = 3};
-    // constructor
-    BufferedChange(int* operand, BufferedChange::Operator op, int value);
-    // deconstructor
-    ~BufferedChange();
-    // executes the buffered change
-    void execute();
-    // operation to apply to value and element
-    int op;
-    // operand to apply operator to
-    int* operand;
-    // value in array to apply operator to
-    int value;
-};
-
-class DynamicArray {
+class BufferedChange
+{
     private:
-        float ALLOC_SIZE = 5/4.0f;
-        float FREE_SIZE = 1/2.0f;
-        float TRIM_SIZE = 3/2.0f;
-        int DEFAULT_SIZE = 10;
-        // pointer to dynamic array
-        int* data_ptr;
-        // number of elements in dynamic array
-        int size;
-        // size/length of dynamic array
-        int avail;
-        // linked list
-        std::list<BufferedChange> buffer;
-        // access tuple: <ptr_elem_dyn_arr, ptr_elem_buff>
-        typedef std::tuple<int*, int*> access_tuple;
-        std::array<access_tuple, DEFAULT_SIZE> access_array;
-        // first free position in access
-        int position_in_access;
-        // append value to buffer
-        void appendToBuffer(BufferedChange* change);
+        // operation to apply to value and element
+        int op;
+        // operand to apply operator to
+        int* operand;
+        // value in array to apply operator to
+        int value;
+        // gets the current value of the element in the array
+        int getValueOf();
+        // applies the add operator
+        int add();
+        // applies the subtract aoperator
+        int subtract();
+        // aplies the multiplication operator
+        int multiply();
+        // applies the division multiplicator
+        int divide();
 
     public:
-        DynamicArray::DynamicArray(int initialSize);
-        DynamicArray::~DynamicArray();
+        // enum storing all available operations
+        enum Operator {NULL_ = 0, ADD = 1, SUBTRACT = 2, MULT = 3, DIV = 4};
+        // constructor
+        BufferedChange(int* operand, BufferedChange::Operator op, int value);
+        // deconstructor
+        ~BufferedChange();
+        // executes the buffered change
+        void execute();
+        // operation to apply to value and element
+        int op;
+        // operand to apply operator to
+        int* operand;
+        // value in array to apply operator to
+        int value;
+};
+
+class DynamicArray
+{
+    private:
+        static const float ALLOC_SIZE = 5/4.0f;
+        static const float FREE_SIZE = 1/2.0f;
+        static const float TRIM_SIZE = 3/2.0f;
+        static const int DEFAULT_SIZE = 10;
+
+    public:
+        DynamicArray(int initialSize);
+        ~DynamicArray();
 
         // return element
         int get(int index);
+        // return value of element
+        int getValueBuff(int* elem_ptr_buff);
         // change element
         void set(int index, BufferedChange::Operator op, int value);
         // add an element
@@ -84,8 +72,28 @@ class DynamicArray {
         void grow();
         // free memory size/2
         void shrink();
-    
+
     private:
+        // pointer to dynamic array
+        int* data_ptr;
+        // number of elements in dynamic array
+        int size;
+        // size/length of dynamic array
+        int avail;
+        // linked list buffer
+        LinkedList buffer;
+        // access tuple: <elem_arr_ptr, elem_buff_ptr>
+        typedef struct
+        {
+            int* elem_arr_ptr;
+            int* elem_buff_ptr;
+        } access_tuple;
+        // access array for fast access to buffer elements
+        access_tuple access_array[DEFAULT_SIZE];
+        // first free position in access
+        int position_in_access;
+        // append value to buffer
+        void appendToBuffer(BufferedChange* change);
 };
 
 #endif
