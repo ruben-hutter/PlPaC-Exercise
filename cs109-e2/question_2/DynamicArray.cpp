@@ -16,18 +16,22 @@ DynamicArray::~DynamicArray()
     delete[] data_ptr;
 }
 
-// gets specific element
+// gets specified element
 int DynamicArray::get(int index)
 {
-    // check if element in access
-    // iterate over buffer with get value of
-    // return
-    // ELSE
-    // get elem from dyn array
     if (index < 0 || index >= size)
     {
         return NULL;
     }
+    // check if element in access
+    for (access_tuple at : access_array) {
+        if (std::get<0>(at) == data_ptr[index]) {
+        }
+    }
+    // iterate over buffer with get value of
+    // return
+    // ELSE
+    // get elem from dyn array
     return data_ptr[index];
 }
 
@@ -169,5 +173,4 @@ int BufferedChange::divide()
 /** TODO 
  * [] set()
  * [] get()
- * [] 
  */

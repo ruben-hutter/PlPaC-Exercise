@@ -51,7 +51,7 @@ class DynamicArray {
         // return element
         int get(int index);
         // change element
-        void set(int index, BufferedChange::Operator operator, int value);
+        void set(int index, BufferedChange::Operator op, int value);
         // add an element
         void add(int element);
         // remove element
@@ -72,9 +72,11 @@ class DynamicArray {
         int avail;
         // linked list
         std::list<BufferedChange> buffer;
-        //access tuple
+        // access tuple: <ptr_elem_dyn_arr, ptr_elem_buff>
         typedef std::tuple<int*, int*> access_tuple;
-        std::array<access_tuple, 10> access_array;
+        std::array<access_tuple, DynamicArray::DEFAULT_SIZE> access_array;
+        // first free position in access
+        int position_in_access;
 };
 
 #endif
