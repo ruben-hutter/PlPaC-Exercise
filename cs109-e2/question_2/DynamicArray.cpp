@@ -36,11 +36,32 @@ int DynamicArray::get(int index)
 }
 
 // change element
-void DynamicArray::set(int position, int element)
+void DynamicArray::set(int index, BufferedChange::Operator op, int value)
 {
-    // create neww buffered change
+    if (index < 0 || index >= size) {
+        return;
+    }
+    // create new buffered change
+    BufferedChange* bc = new BufferedChange(&data_ptr[index], op, value);
     // put change in buffer
-    // create access entry if not already contained
+    appendToBuffer(bc);
+    // create access entry if not already contained ()
+    int found = 0;
+    for (int i = 0; i < 10; i++) {
+        if (bc->operand != &data_ptr[index]) {
+            continue;
+        }
+        found = 1;
+    }
+    if (found != 0) {
+        
+        access_array[position_in_access] = 
+    }
+}
+
+// appends the specified change to the buffer
+void DynamicArray::appendToBuffer(BufferedChange* change) {
+
 }
 
 // add an element
@@ -115,8 +136,8 @@ void DynamicArray::shrink()
 }
 
 // constructor
-BufferedChange::BufferedChange() {
-
+BufferedChange::BufferedChange(int* operand, Operator op, int value) {
+    value = 0;
 }
 
 // deconstructor

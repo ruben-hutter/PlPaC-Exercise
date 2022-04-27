@@ -25,16 +25,22 @@ private:
     int multiply();
     // applies the division multiplicator
     int divide();
-    // enum storing all available operations
-    enum Operator {ADD = 0, SUBTRACT = 1, MULT = 2, DIV = 3};
 
 public:
     // constructor
-    BufferedChange();
+    BufferedChange(int* operand, BufferedChange::Operator op, int value);
     // deconstructor
     ~BufferedChange();
     // executes the buffered change
     void execute();
+    // enum storing all available operations
+    enum Operator {ADD = 0, SUBTRACT = 1, MULT = 2, DIV = 3};
+    // operation to apply to value and element
+    int op;
+    // operand to apply operator to
+    int* operand;
+    // value in array to apply operator to
+    int value;
 };
 
 class DynamicArray {
@@ -77,6 +83,8 @@ class DynamicArray {
         std::array<access_tuple, DynamicArray::DEFAULT_SIZE> access_array;
         // first free position in access
         int position_in_access;
+        // append value to buffer
+        void appendToBuffer(BufferedChange* change);
 };
 
 #endif
