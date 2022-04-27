@@ -16,7 +16,7 @@ private:
     // value in array to apply operator to
     int value;
     // gets the current value of the element in the array
-    int getValueOf(int* operand);
+    int getValueOf();
     // applies the add operator
     int add();
     // applies the subtract aoperator
