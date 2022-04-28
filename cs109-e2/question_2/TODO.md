@@ -11,11 +11,11 @@
 [x] error in constructor
 [x] destructor
 [x] append()
-[] overwrite() (last thing to do)
+[] overwrite()
 [x] appendTail()
 [x] execute()
 [x] getValueOf()
-[] remove() (last thing to do)
+[x] remove()
 
 ## LinkedList.h
 
@@ -26,6 +26,8 @@
 ## Free memory
 
 ### DynamicArray
+
+[] access_array and access_tuples
 
 [x] constructor
 [] set()

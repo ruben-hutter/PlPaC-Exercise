@@ -97,6 +97,7 @@ int LinkedList::getValueOf(Node* elem_buff_ptr)
     int original_arr_operand = *original_arr_operand_ptr;
     int return_value;
 
+    // actual elem
     Node* actual_elem = elem_buff_ptr;
     // iterate from elem_buff_ptr to end of sequence
     while (actual_elem != NULL)
@@ -118,9 +119,43 @@ int LinkedList::getValueOf(Node* elem_buff_ptr)
 // remove a sequence of buffered changes
 void LinkedList::remove(Node* elem_buff_ptr)
 {
+    // save elem_buff_ptr's operand
+    int* elem_buff_operand = elem_buff_ptr->bufferedChange->operand;
+    // save prev elem
+    Node* elem_prev = elem_buff_ptr->prev;
+    // actual elem
+    Node* actual_elem = elem_buff_ptr;
+    // elem to delete
+    Node* elem_to_delete;
+    // iterate from elem_buff_ptr to end of sequence
+    while (actual_elem != NULL)
+    {
+        if (actual_elem->bufferedChange->operand != elem_buff_operand)
+        {
+            // set new pointers without sequence
+            actual_elem->prev = elem_prev;
+            elem_prev->next = actual_elem;
+            break;
+        }
+        else if (actual_elem == tail)
+        {
+            // delete last elem
+            elem_to_delete = actual_elem;
+            delete elem_to_delete->bufferedChange;
+            delete elem_to_delete;
+            // update pointers
+            tail = elem_prev;
+            tail->next = NULL;
+            break;
+        }
+        elem_to_delete = actual_elem;
+        actual_elem = actual_elem->next;
+        delete elem_to_delete->bufferedChange;
+        delete elem_to_delete;
+    }
 }
 
-// print list
+// print list (for debugging)
 void LinkedList::print()
 {
     Node* actual_elem = head->next;

@@ -74,7 +74,7 @@ class LinkedList
         void appendTail(Node* new_buff_elem);
         // remove a sequence of buffered changes
         void remove(Node* elem_buff_ptr);
-        // print list
+        // print list (for debugging)
         void print();
 };
 
