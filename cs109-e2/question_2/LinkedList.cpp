@@ -4,7 +4,7 @@
 LinkedList::LinkedList()
 {
     // initialize head with zero_op node
-    LinkedList::Node* zero_op = new Node;
+    Node* zero_op = new Node;
     head = zero_op;
     tail = zero_op;
 }
@@ -18,7 +18,7 @@ LinkedList::~LinkedList()
 // append node at the end of an element related sequence
 // of operations and returns the pointer to the beginning
 // of this sequence. [A,A,B,C] -> append(A), return ptr to A[0]
-LinkedList::Node* LinkedList::append(LinkedList::Node* new_buff_elem, LinkedList::Node* start_of_sequence)
+LinkedList::Node* LinkedList::append(Node* new_buff_elem, Node* start_of_sequence)
 {
     // iterate over buffer starting by start_of_sequence
     LinkedList::Node* actual_elem = start_of_sequence;
@@ -54,7 +54,7 @@ void LinkedList::overwrite()
 }
 
 // append to tail
-void LinkedList::appendTail(LinkedList::Node* new_buff_elem)
+void LinkedList::appendTail(Node* new_buff_elem)
 {
     // set links of new element
     new_buff_elem->prev = tail;
@@ -75,27 +75,35 @@ void LinkedList::execute()
 // would have, if the buffered changes would be applied.
 int LinkedList::getValueOf(Node* elem_buff_ptr)
 {
-    // TODO
-    int value;
-    LinkedList::Node* actual_elem;
+    int value = 0;
+    Node* actual_elem = elem_buff_ptr;
     // iterate from elem_buff_ptr to end of sequence
+    while (actual_elem != NULL)
+    {
+        if (actual_elem->bufferedChange->operand != elem_buff_ptr->bufferedChange->operand)
+        {
+            break;
+        }
+        value += actual_elem->bufferedChange->getValueOf();
+        actual_elem = actual_elem->next;
+    }
     // and update value
     return value;
 }
 
 // remove a sequence of buffered changes
-void LinkedList::remove(LinkedList::Node* elem_buff_ptr)
+void LinkedList::remove(Node* elem_buff_ptr)
 {
 }
 
 // print list
 void LinkedList::print()
 {
-    LinkedList::Node* actual_elem = head->next;
+    Node* actual_elem = head->next;
     while (actual_elem != NULL)
     {
         std::cout << *(actual_elem->bufferedChange->operand) << " ";
         actual_elem = actual_elem->next;
     }
-    std::cout << "\n";
+    std::cout << std::endl;
 }

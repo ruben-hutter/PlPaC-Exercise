@@ -4,12 +4,14 @@ int main()
 {
     LinkedList ll;
 
-    int value = 6;
+    int value = 8;
     int* operand = &value;
 
     LinkedList::Node node1;
-    BufferedChange buff_change(operand, BufferedChange::ADD, 4);
+    BufferedChange buff_change(operand, BufferedChange::DIV, 4);
     node1.bufferedChange = &buff_change;
+
+    node1.bufferedChange->execute();
 
     int value2 = 5;
     int* operand2 = &value2;
