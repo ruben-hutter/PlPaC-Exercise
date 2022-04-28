@@ -5,6 +5,9 @@ LinkedList::LinkedList()
 {
     // initialize head with zero_op node
     Node* zero_op = new Node;
+    zero_op->bufferedChange = NULL;
+    zero_op->next = NULL;
+    zero_op->prev = NULL;
     head = zero_op;
     tail = zero_op;
 }
@@ -68,7 +71,18 @@ void LinkedList::appendTail(Node* new_buff_elem)
 // executes buffered changes in this list
 void LinkedList::execute()
 {
-    // TODO
+    Node* actual_elem = head->next;
+    Node* elem_to_delete;
+    while (actual_elem != NULL)
+    {
+        actual_elem->bufferedChange->execute();
+        elem_to_delete = actual_elem;
+        actual_elem = actual_elem->next;
+        // free memory
+        // delete elem_to_delete->bufferedChange;
+        // delete elem_to_delete;
+    }
+    tail = head;
 }
 
 // function that returns the value of an element that it
