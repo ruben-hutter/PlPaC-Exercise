@@ -94,7 +94,8 @@ void LinkedList::print()
     LinkedList::Node* actual_elem = head->next;
     while (actual_elem != NULL)
     {
-        std::cout << *actual_elem->bufferedChange->operand << " " << std::endl;
+        std::cout << *(actual_elem->bufferedChange->operand) << " ";
         actual_elem = actual_elem->next;
     }
+    std::cout << "\n";
 }
