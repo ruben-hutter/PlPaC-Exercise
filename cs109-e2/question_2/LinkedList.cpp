@@ -79,9 +79,11 @@ void LinkedList::execute()
         elem_to_delete = actual_elem;
         actual_elem = actual_elem->next;
         // free memory
-        // delete elem_to_delete->bufferedChange;
-        // delete elem_to_delete;
+        delete elem_to_delete->bufferedChange;
+        delete elem_to_delete;
     }
+    // reset empty list pointers
+    head->next = NULL;
     tail = head;
 }
 

@@ -13,7 +13,7 @@
 [x] append()
 [] overwrite() (last thing to do)
 [x] appendTail()
-[] execute()
+[x] execute()
 [x] getValueOf()
 [] remove() (last thing to do)
 
