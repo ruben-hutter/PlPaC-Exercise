@@ -7,6 +7,7 @@
 using namespace std;
 
 class OverloadedElementType: public ElementType {
+public:
     OverloadedElementType(string descriptor, int uid, double* props, list<string> description);
     double& operator[](int param_number);
     OverloadedElementType operator-(OverloadedElementType& that);
