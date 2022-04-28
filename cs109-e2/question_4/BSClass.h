@@ -51,7 +51,7 @@ public:
 
     void print() {
         for (auto e : e_list)
-            std::cout << v << "\n";
+            std::cout << e << "\n";
     };
 };
 
