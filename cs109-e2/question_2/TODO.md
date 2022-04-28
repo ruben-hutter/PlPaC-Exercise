@@ -14,7 +14,7 @@
 [] overwrite() (last thing to do)
 [x] appendTail()
 [] execute()
-[] getValueOf()
+[x] getValueOf()
 [] remove() (last thing to do)
 
 ## LinkedList.h

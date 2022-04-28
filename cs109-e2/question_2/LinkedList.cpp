@@ -75,20 +75,28 @@ void LinkedList::execute()
 // would have, if the buffered changes would be applied.
 int LinkedList::getValueOf(Node* elem_buff_ptr)
 {
-    int value = 0;
+    // save elem_buff_ptr's operand
+    int* original_arr_operand_ptr = elem_buff_ptr->bufferedChange->operand;
+    // value of operand
+    int original_arr_operand = *original_arr_operand_ptr;
+    int return_value;
+
     Node* actual_elem = elem_buff_ptr;
     // iterate from elem_buff_ptr to end of sequence
     while (actual_elem != NULL)
     {
-        if (actual_elem->bufferedChange->operand != elem_buff_ptr->bufferedChange->operand)
+        if (actual_elem->bufferedChange->operand != original_arr_operand_ptr)
         {
             break;
         }
-        value += actual_elem->bufferedChange->getValueOf();
+        *original_arr_operand_ptr = actual_elem->bufferedChange->getValueOf();
         actual_elem = actual_elem->next;
     }
-    // and update value
-    return value;
+    // save updated value
+    return_value = *original_arr_operand_ptr;
+    // reset to original value
+    *original_arr_operand_ptr = original_arr_operand;
+    return return_value;
 }
 
 // remove a sequence of buffered changes

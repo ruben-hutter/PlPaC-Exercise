@@ -22,12 +22,12 @@ class BufferedChange
         int divide();
 
     public:
+        // enum storing all available operations
+        enum Operator {NULL_ = 0, ADD = 1, SUBTRACT = 2, MULT = 3, DIV = 4};
         // constructor
         BufferedChange(int* operand, enum Operator op, int value);
         // deconstructor
         ~BufferedChange();
-        // enum storing all available operations
-        enum Operator {NULL_ = 0, ADD = 1, SUBTRACT = 2, MULT = 3, DIV = 4};
         // operand to apply operator to
         int* operand;
         // gets the value of the element after changes
