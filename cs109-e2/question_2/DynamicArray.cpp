@@ -80,7 +80,7 @@ void DynamicArray::add(int element)
     data_ptr[size++] = element;
 }
 
-// remove element form the end of the array
+// remove element from the end of the array
 void DynamicArray::remove()
 {
     // emtpy array
@@ -92,17 +92,12 @@ void DynamicArray::remove()
     int* elem_to_delete = &data_ptr[size];
     *elem_to_delete = 0;
     shrink();
-    // check if operations buffered and remove them if so
-    for (int i = 0; i < position_in_access; i++)
+    // check if operations buffered for elem and remove them if so
+    int idx_in_access = checkAccess(elem_to_delete);
+    if (0 < idx_in_access)
     {
-        int* access_elem_i = access_array[i].elem_arr_ptr;
-        if (elem_to_delete == access_elem_i)
-        {
-            // delete buff_change
-            LinkedList::Node* elem_buff_ptr = access_array[i].elem_buff_ptr;
-            buffer.remove(elem_buff_ptr);
-            // delete access_tuple
-        }
+        // delete buffer sequence
+        // delete access_array entry and copy new array
     }
 }
 
@@ -110,9 +105,10 @@ void DynamicArray::remove()
 void DynamicArray::trim()
 {
     // exec all buffer changes
+    // empty access_array and resets idx_ptr
 
     // delete access_tuples
-    // delete buff_changes
+    // delete buff_changes -> buffer.execute()
 }
 
 // increases the memory by the specified value
@@ -171,6 +167,12 @@ int DynamicArray::checkAccess(int* elem_arr_ptr)
         }
     }
     return -1;
+}
+
+// copy of access_array when removing elements
+void DynamicArray::copyAccess()
+{
+    // TODO
 }
 
 // constructor

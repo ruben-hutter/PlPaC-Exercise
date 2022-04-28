@@ -4,6 +4,7 @@
 
 [] trim()
 [] remove()
+[] copyAccess()
 [x] BufferedChange destructor
 
 ## LinkedList.cpp
