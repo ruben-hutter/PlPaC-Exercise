@@ -24,15 +24,16 @@ int DynamicArray::get(int index)
 {
     if (index < 0 || index >= size)
     {
-        return NULL;
+        return -1;
     }
     // check if element in access
     int* elem_arr_ptr = &data_ptr[index];
-    LinkedList::Node* at_index = checkAccess(elem_arr_ptr);
-    if (at_index != NULL)
+    int at_index = checkAccess(elem_arr_ptr);
+    LinkedList::Node* elem_buff_ptr = access_array[at_index].elem_buff_ptr;
+    if (0 < at_index)
     {
         // iterate over buffer and return value for element
-        return buffer.getValueOf(at_index);
+        return buffer.getValueOf(elem_buff_ptr);
     }
     // get elem from dyn array
     return data_ptr[index];
@@ -63,13 +64,12 @@ void DynamicArray::set(int index, BufferedChange::Operator op, int value)
         // add access_tuple to access_array and increment position
         access_array[position_in_access++] = *at;
         // append to tail of buffer
-        buffer.appendTail(buff_change);
+        buffer.appendTail(new_buff_elem);
     }
     else
     {
         // append to sequence
-        buffer.append(new_buff_elem, start_of_sequence);
-        // create access entry if not already contained
+        buffer.append(new_buff_elem, elem_buff_ptr);
     }
 }
 
