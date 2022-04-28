@@ -10,8 +10,6 @@ class BufferedChange
     private:
         // operation to apply to value and element
         int op;
-        // operand to apply operator to
-        int* operand;
         // value in array to apply operator to
         int value;
         // gets the value of the element after changes
@@ -28,6 +26,8 @@ class BufferedChange
     public:
         // enum storing all available operations
         enum Operator {NULL_ = 0, ADD = 1, SUBTRACT = 2, MULT = 3, DIV = 4};
+        // operand to apply operator to
+        int* operand;
         // constructor
         BufferedChange(int* operand, enum Operator op, int value);
         // deconstructor

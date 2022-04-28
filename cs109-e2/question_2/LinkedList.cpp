@@ -19,11 +19,24 @@ LinkedList::~LinkedList()
 // of this sequence. [A,A,B,C] -> append(A), return ptr to A[0]
 LinkedList::Node* LinkedList::append(LinkedList::Node* new_buff_elem, LinkedList::Node* start_of_sequence)
 {
-    Node* tmp = new Node;
-    tmp->next = NULL;
+    // iterate over buffer starting by start_of_sequence
+    LinkedList::Node* actual_elem = start_of_sequence;
+    while (actual_elem != NULL)
+    {
+        if (actual_elem->bufferedChange->operand != new_buff_elem->bufferedChange->operand)
+        {
+            // set links of new element
+            new_buff_elem->next = actual_elem;
+            new_buff_elem->prev = actual_elem->prev;
 
-    tail->next = tmp;
-    tail = tail->next;
+            // set links of prev and next elem of new
+            actual_elem->prev->next = new_buff_elem;
+            actual_elem->prev = new_buff_elem;
+            return start_of_sequence;
+        }
+        actual_elem = actual_elem->next;
+    }
+    appendTail(new_buff_elem);
     return start_of_sequence;
 }
 
