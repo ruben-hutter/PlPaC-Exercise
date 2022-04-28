@@ -2,7 +2,7 @@
 
 ## DynamicArray.cpp
 
-[] trim()
+[x] trim()
 [x] remove()
 [x] removeAccess()
 [x] BufferedChange destructor
@@ -28,10 +28,10 @@
 
 ### DynamicArray
 
-[] access_array and access_tuples
+[x] access_array and access_tuples
 
 [x] constructor
-[] set()
+[x] set()
 
 ### LinkedList
 

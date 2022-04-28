@@ -120,15 +120,17 @@ class DynamicArray
             LinkedList::Node* elem_buff_ptr;
         } access_tuple;
         // access array for fast access to buffer elements
-        access_tuple access_array[DEFAULT_SIZE];
+        access_tuple* access_array;
         // first free position in access
         int position_in_access;
         // linked list buffer
         LinkedList buffer;
         // check if element in access
         int checkAccess(int* elem_arr_ptr);
-        // copy of access_array when removing elements
+        // remove access_array entry
         void removeAccess(access_tuple access_elem, int index);
+        // clear access_array
+        void clearAccess();
 };
 
 #endif

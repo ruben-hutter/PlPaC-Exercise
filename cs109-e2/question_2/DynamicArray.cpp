@@ -11,6 +11,7 @@ DynamicArray::DynamicArray(int initialSize)
     }
     data_ptr = new int[initialSize];
     // initialize access index to first free position
+    access_array = new access_tuple[DEFAULT_SIZE];
     position_in_access = 0;
 }
 
@@ -108,10 +109,9 @@ void DynamicArray::remove()
 void DynamicArray::trim()
 {
     // exec all buffer changes
-    // empty access_array and resets idx_ptr
-
-    // delete access_tuples
-    // delete buff_changes -> buffer.execute()
+    buffer.execute();
+    // empty access_array and reset idx_ptr
+    clearAccess();
 }
 
 // increases the memory by the specified value
@@ -175,8 +175,8 @@ int DynamicArray::checkAccess(int* elem_arr_ptr)
 // remove access_array entry
 void DynamicArray::removeAccess(access_tuple access_elem, int index)
 {
-    // temp access array
-    access_tuple tmp_access[DEFAULT_SIZE];
+    // temp access_array
+    access_tuple* tmp_access = new access_tuple[DEFAULT_SIZE];
     // temp ptr
     int tmp_ptr = 0;
     for (int i = 0; i < position_in_access; i++)
@@ -191,7 +191,23 @@ void DynamicArray::removeAccess(access_tuple access_elem, int index)
             delete &access_array[i];
         }
     }
+    // free memory
+    delete[] access_array;
+    access_array = tmp_access;
+    // decrese access ptr
     position_in_access--;
+}
+
+// clear access_array
+void DynamicArray::clearAccess()
+{
+    // iterate access_array
+    for (int i = 0; i < position_in_access; i++)
+    {
+        // free memory
+        delete &access_array[i];
+    }
+    position_in_access = 0;
 }
 
 // constructor
