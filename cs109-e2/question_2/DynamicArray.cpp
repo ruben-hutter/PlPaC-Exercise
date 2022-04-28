@@ -97,7 +97,10 @@ void DynamicArray::remove()
     if (0 < idx_in_access)
     {
         // delete buffer sequence
-        // delete access_array entry and copy new array
+        access_tuple access_elem = access_array[idx_in_access];
+        buffer.remove(access_elem.elem_buff_ptr);
+        // delete access_array entry
+        removeAccess(access_elem, idx_in_access);
     }
 }
 
@@ -169,10 +172,26 @@ int DynamicArray::checkAccess(int* elem_arr_ptr)
     return -1;
 }
 
-// copy of access_array when removing elements
-void DynamicArray::copyAccess()
+// remove access_array entry
+void DynamicArray::removeAccess(access_tuple access_elem, int index)
 {
-    // TODO
+    // temp access array
+    access_tuple tmp_access[DEFAULT_SIZE];
+    // temp ptr
+    int tmp_ptr = 0;
+    for (int i = 0; i < position_in_access; i++)
+    {
+        if (i != index)
+        {
+            tmp_access[tmp_ptr++] = access_array[i];
+        }
+        else
+        {
+            // free memory
+            delete &access_array[i];
+        }
+    }
+    position_in_access--;
 }
 
 // constructor

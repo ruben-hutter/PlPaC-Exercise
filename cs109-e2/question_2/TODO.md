@@ -3,8 +3,8 @@
 ## DynamicArray.cpp
 
 [] trim()
-[] remove()
-[] copyAccess()
+[x] remove()
+[x] removeAccess()
 [x] BufferedChange destructor
 
 ## LinkedList.cpp

@@ -106,11 +106,6 @@ class DynamicArray
         // free memory size/2
         void shrink();
 
-        // check if element in access
-        int checkAccess(int* elem_arr_ptr);
-        // copy of access_array when removing elements
-        void copyAccess();
-
     private:
         // pointer to dynamic array
         int* data_ptr;
@@ -130,6 +125,10 @@ class DynamicArray
         int position_in_access;
         // linked list buffer
         LinkedList buffer;
+        // check if element in access
+        int checkAccess(int* elem_arr_ptr);
+        // copy of access_array when removing elements
+        void removeAccess(access_tuple access_elem, int index);
 };
 
 #endif
