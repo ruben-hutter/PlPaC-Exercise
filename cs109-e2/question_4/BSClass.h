@@ -9,7 +9,7 @@ using namespace std;
 
 template <typename T>
 class BSClass {
-    std::list<T> e_list = std::list<T>;
+    std::list<T> e_list;
 public:
     void sort() {
         e_list.sort();
@@ -25,7 +25,7 @@ public:
 
     T get_elem(int index) {
         auto e_ptr = e_list.begin();
-        std::advance(e_ptr, index):
+        std::advance(e_ptr, index);
         return *e_ptr;
     };
 
