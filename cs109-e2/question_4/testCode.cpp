@@ -24,7 +24,7 @@ void run_int_test(BSClass<int64_t> int64_t_list) {
     cout << "> TEST: Int64_t Test..." << endl;
     // init random gen
     std::default_random_engine dre((std::random_device())());
-    std::uniform_int_distribution<int8_t> uid(INT64_MIN, INT64_MAX);
+    std::uniform_int_distribution<int64_t> uid(INT64_MIN, INT64_MAX);
     // populate array with 100 random values
     for (int i = 0; i < 100; i++) {
         int64_t_list.add_elem(uid(dre));
