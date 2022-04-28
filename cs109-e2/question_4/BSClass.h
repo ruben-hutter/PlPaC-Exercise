@@ -9,7 +9,7 @@ using namespace std;
 
 template <typename T>
 class BSClass {
-    e_list = std::list<T>;
+    std::list<T> e_list;
 public:
     void sort();
     void add_elem(T elem);

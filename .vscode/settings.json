@@ -41,6 +41,8 @@
         "streambuf": "cpp",
         "typeinfo": "cpp",
         "functional": "cpp",
-        "iterator": "cpp"
+        "iterator": "cpp",
+        "numeric": "cpp",
+        "random": "cpp"
     }
 }
