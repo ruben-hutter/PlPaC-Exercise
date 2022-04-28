@@ -64,16 +64,18 @@ class LinkedList
         Node* append(Node* new_buff_elem, Node* start_of_sequence);
         // overwrite buffered change sequenze of element, and becomes
         // first of sequence.
-        void overwrite(BufferedChange* buff_change);
+        void overwrite();
         // executes buffered changes in this list
         void execute();
         // function that returns the value of an element that it
         // would have, if the buffered changes would be applied.
         int getValueOf(Node* elem_buff_ptr);
         // append to tail
-        void appendTail(LinkedList::Node* new_buff_elem);
+        void appendTail(Node* new_buff_elem);
         // remove a sequence of buffered changes
         void remove(Node* elem_buff_ptr);
+        // print list
+        void print();
 };
 
 // The Dynamic Array
@@ -97,7 +99,7 @@ class DynamicArray
         void add(int element);
         // remove element
         void remove();
-        // executes the buffered changes at sets the available memory to 3/2
+        // executes the buffered changes
         void trim();
         // allocate memory 5/4 size
         void grow();

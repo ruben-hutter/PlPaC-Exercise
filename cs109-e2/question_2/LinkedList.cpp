@@ -4,8 +4,9 @@
 LinkedList::LinkedList()
 {
     // initialize head with zero_op node
-    head = new Node;
-    tail = head;
+    LinkedList::Node* zero_op = new Node;
+    head = zero_op;
+    tail = zero_op;
 }
 
 // destructor
@@ -42,7 +43,7 @@ LinkedList::Node* LinkedList::append(LinkedList::Node* new_buff_elem, LinkedList
 
 // overwrite buffered change sequenze of element, and becomes
 // first of sequence.
-void LinkedList::overwrite(BufferedChange* buff_change)
+void LinkedList::overwrite()
 {
     // TODO
     // 1. check if elem in access (check if in buffer)
@@ -85,4 +86,15 @@ int LinkedList::getValueOf(Node* elem_buff_ptr)
 // remove a sequence of buffered changes
 void LinkedList::remove(LinkedList::Node* elem_buff_ptr)
 {
+}
+
+// print list
+void LinkedList::print()
+{
+    LinkedList::Node* actual_elem = head->next;
+    while (actual_elem != NULL)
+    {
+        std::cout << *actual_elem->bufferedChange->operand << " " << std::endl;
+        actual_elem = actual_elem->next;
+    }
 }

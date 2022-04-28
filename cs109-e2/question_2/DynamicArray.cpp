@@ -106,7 +106,7 @@ void DynamicArray::remove()
     }
 }
 
-// executes the buffered changes at sets the available memory to 3/2
+// executes the buffered changes
 void DynamicArray::trim()
 {
     // exec all buffer changes
@@ -200,8 +200,8 @@ int BufferedChange::getValueOf()
         return multiply();
     case 4:
         return divide();
-        return NULL;
     }
+    return -1;
 }
 
 // executes the buffered change
