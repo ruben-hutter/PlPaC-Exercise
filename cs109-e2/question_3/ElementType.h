@@ -7,7 +7,8 @@ using namespace std;
 
 class ElementType {
 public:
-    ElementType(string descriptor, int uid, double* props, list<string>* description);
+    ElementType(string descriptor, int uid, double* props, list<string> description);
+    list<string> getDescription();
     string descriptor;
     int uid;
     double* properties;
