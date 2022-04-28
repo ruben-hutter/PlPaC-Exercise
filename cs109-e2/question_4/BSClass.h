@@ -23,6 +23,13 @@ public:
         e_list.erase(index);
     };
 
+    void remove_first(T elem) {
+        auto it = std::find(e_list.begin(), e_list.end(), 3);
+        if (it != e_list.end()) {
+            e_list.erase(it);
+        }
+    }
+
     T get_elem(int index) {
         auto e_ptr = e_list.begin();
         std::advance(e_ptr, index);
@@ -30,22 +37,30 @@ public:
     };
 
     void add(int index, T operand) {
-        get_elem(index) += operand;
+        T e = get_elem(index);
+        add_elem(e + operand);
+        remove_first(e);
         sort();
     };
 
     void subtract(int index, T operand) {
-        get_elem(index) -= operand;
+        T e = get_elem(index);
+        add_elem(e - operand);
+        remove_first(e);
         sort();
     };
 
     void mult(int index, T operand) {
-        get_elem(index) *= operand;
+        T e = get_elem(index);
+        add_elem(e * operand);
+        remove_first(e);
         sort();
     };
 
     void div(int index, T operand) {
-        get_elem(index) /= operand;
+        T e = get_elem(index);
+        add_elem(e / operand);
+        remove_first(e);
         sort();
     };
 
