@@ -7,9 +7,11 @@ DynamicArray::DynamicArray(int initialSize)
     if (initialSize < 0)
     {
         data_ptr = new int[DEFAULT_SIZE];
-        return;
     }
-    data_ptr = new int[initialSize];
+    else
+    {
+        data_ptr = new int[initialSize];
+    }
     // initialize access index to first free position
     access_array = new access_tuple[DEFAULT_SIZE];
     position_in_access = 0;
