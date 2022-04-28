@@ -6,13 +6,14 @@ void run_byte_test(BSClass<int8_t> byte_list) {
     cout << "> TEST: Byte Test..." << endl;
     // init random gen
     std::default_random_engine dre((std::random_device())());
-    std::uniform_int_distribution<int8_t> uid(INT8_MIN, INT8_MAX);
+    std::uniform_int_distribution<signed char> uid(std::numeric_limits<signed char>::min(), std::numeric_limits<signed char>::max());
     // populate array with 100 random values
     for (int i = 0; i < 100; i++) {
         byte_list.add_elem(uid(dre));
     }
     // print
     byte_list.print();
+    cout << "> TEST: Byte Test..." << endl;
     // sort
     byte_list.sort();
     // print
@@ -20,22 +21,22 @@ void run_byte_test(BSClass<int8_t> byte_list) {
     byte_list.print();
 }
 
-void run_int_test(BSClass<int64_t> int64_t_list) {
-    cout << "> TEST: Int64_t Test..." << endl;
+void run_int_test(BSClass<long long int> long_long_int_list) {
+    cout << "> TEST: Long Long Int Test..." << endl;
     // init random gen
     std::default_random_engine dre((std::random_device())());
-    std::uniform_int_distribution<int64_t> uid(INT64_MIN, INT64_MAX);
+    std::uniform_int_distribution<long long int> uid(std::numeric_limits<long long int>::min(), std::numeric_limits<long long int>::max());
     // populate array with 100 random values
     for (int i = 0; i < 100; i++) {
-        int64_t_list.add_elem(uid(dre));
+        long_long_int_list.add_elem(uid(dre));
     }
     //print
-    int64_t_list.print();
+    long_long_int_list.print();
     // sort
-    int64_t_list.sort();
+    long_long_int_list.sort();
     //print
     cout << "Sorted version:" << endl;
-    int64_t_list.print();
+    long_long_int_list.print();
 }
 
 void run_float_test(BSClass<float> float_list) {
@@ -76,12 +77,16 @@ void run_long_double_test(BSClass<long double> double_long_list) {
 
 int main() {
     // check byte
-    BSClass<int8_t> byte_list;
+    BSClass<signed char> byte_list;
+    run_byte_test(byte_list);
     // check long long int
-    BSClass<int64_t> int64_t_list;
+    BSClass<long long int> long_long_int_list;
+    run_int_test(long_long_int_list);
     // check float
     BSClass<float> float_list;
+    run_float_test(float_list);
     // check long double
-    BSClass<long double> double_long_list;
+    BSClass<long double> long_double_list;
+    run_long_double_test(long_double_list);
     return 0;
 }
