@@ -3,18 +3,21 @@
 ## DynamicArray.cpp
 
 [] trim()
-[] BufferedChange destructor
+[] remove()
+[] delete checkAccess() index
+[x] BufferedChange destructor
 
 ## LinkedList.cpp
 
-[] error in constructor
-[] destructor
+[x] error in constructor
+[x] destructor
 [] append()
 [] overwrite() (last thing to do)
-[] appendTail()
+[x] appendTail()
 [] execute()
 [] getValueOf()
+[] remove()
 
 ## LinkedList.h
 
-[] error BufferedChange
+[x] error BufferedChange

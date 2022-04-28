@@ -1,7 +1,7 @@
 #ifndef DYNAMIC_ARRAY_H
 #define DYNAMIC_ARRAY_H
 
-// #include <cmath>
+#include <cmath>
 #include <iostream>
 
 // The Buffer's Element
@@ -39,20 +39,20 @@ class BufferedChange
 // The Buffer
 class LinkedList
 {
-    private:
-        // head of list
-        struct Node* head;
-        // tail of list
-        struct Node* tail;
-
     public:
         // node of linked list
         struct Node
         {
-            BufferedChange bufferedChange;
+            BufferedChange* bufferedChange;
             struct Node* next;
             struct Node* prev;
         };
+        // head of list
+        Node* head;
+        // tail of list
+        Node* tail;
+
+    public:
         // constructor
         LinkedList();
         // destructor
@@ -61,7 +61,7 @@ class LinkedList
         // append node at the end of an element related sequence
         // of operations and returns the pointer to the beginning
         // of this sequence. [A,A,B,C] -> append(A), return ptr to A[0]
-        Node* append(BufferedChange* buff_change);
+        Node* append(Node* new_buff_elem, Node* start_of_sequence);
         // overwrite buffered change sequenze of element, and becomes
         // first of sequence.
         void overwrite(BufferedChange* buff_change);
@@ -70,10 +70,10 @@ class LinkedList
         // function that returns the value of an element that it
         // would have, if the buffered changes would be applied.
         int getValueOf(Node* elem_buff_ptr);
-
-    private:
         // append to tail
-        void appendTail(BufferedChange* buff_change);
+        void appendTail(LinkedList::Node* new_buff_elem);
+        // remove a sequence of buffered changes
+        void remove(Node* elem_buff_ptr);
 };
 
 // The Dynamic Array
@@ -104,6 +104,9 @@ class DynamicArray
         // free memory size/2
         void shrink();
 
+        // check if element in access
+        int checkAccess(int* elem_arr_ptr);
+
     private:
         // pointer to dynamic array
         int* data_ptr;
@@ -111,8 +114,6 @@ class DynamicArray
         int size;
         // size/length of dynamic array
         int avail;
-        // linked list buffer
-        LinkedList buffer;
         // access tuple: <elem_arr_ptr, elem_buff_ptr>
         typedef struct
         {
@@ -123,6 +124,8 @@ class DynamicArray
         access_tuple access_array[DEFAULT_SIZE];
         // first free position in access
         int position_in_access;
+        // linked list buffer
+        LinkedList buffer;
 };
 
 #endif

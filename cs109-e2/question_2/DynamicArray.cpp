@@ -27,14 +27,12 @@ int DynamicArray::get(int index)
         return NULL;
     }
     // check if element in access
-    for (int i = 0; i < position_in_access; i++)
+    int* elem_arr_ptr = &data_ptr[index];
+    LinkedList::Node* at_index = checkAccess(elem_arr_ptr);
+    if (at_index != NULL)
     {
-        int* elem_arr_ptr = access_array[i].elem_arr_ptr;
-        if (elem_arr_ptr == &data_ptr[index])
-        {
-            // iterate over buffer and return value for element
-            return buffer.getValueOf(access_array[i].elem_buff_ptr);
-        }
+        // iterate over buffer and return value for element
+        return buffer.getValueOf(at_index);
     }
     // get elem from dyn array
     return data_ptr[index];
@@ -48,27 +46,30 @@ void DynamicArray::set(int index, BufferedChange::Operator op, int value)
         return;
     }
     // create new buffered change
-    BufferedChange* bc = new BufferedChange(&data_ptr[index], op, value);
-    // put change in buffer and get sequence ptr in buffer
-    LinkedList::Node* elem_buff_ptr = buffer.append(bc);
-    // create access entry if not already contained
-    bool found = false;
-    for (int i = 0; i < position_in_access; i++)
-    {
-        int* elem_arr_ptr = access_array[i].elem_arr_ptr;
-        if (elem_arr_ptr == &data_ptr[index])
-        {
-            found = true;
-        }
-    }
-    if (!found)
+    BufferedChange* buff_change = new BufferedChange(&data_ptr[index], op, value);
+    // create new node
+    LinkedList::Node* new_buff_elem = new LinkedList::Node;
+    new_buff_elem->bufferedChange = buff_change;
+    // check if element in access
+    int* elem_arr_ptr = &data_ptr[index];
+    int at_index = checkAccess(elem_arr_ptr);
+    LinkedList::Node* elem_buff_ptr = access_array[at_index].elem_buff_ptr;
+    if (at_index < 0)
     {
         // new access_tuple for elem
-        access_tuple at;
-        at.elem_arr_ptr = &data_ptr[index];
-        at.elem_buff_ptr = elem_buff_ptr;
+        access_tuple* at = new access_tuple;
+        at->elem_arr_ptr = elem_arr_ptr;
+        at->elem_buff_ptr = elem_buff_ptr;
         // add access_tuple to access_array and increment position
-        access_array[position_in_access++] = at;
+        access_array[position_in_access++] = *at;
+        // append to tail of buffer
+        buffer.appendTail(buff_change);
+    }
+    else
+    {
+        // append to sequence
+        buffer.append(new_buff_elem, start_of_sequence);
+        // create access entry if not already contained
     }
 }
 
@@ -85,17 +86,33 @@ void DynamicArray::remove()
     // emtpy array
     if (size == 0)
     {
-        cout << "Array is empty!" << endl;
+        std::cout << "Array is empty!" << std::endl;
         return;
     }
-    data_ptr[size--] = 0;
+    int* elem_to_delete = &data_ptr[size];
+    *elem_to_delete = 0;
     shrink();
+    // check if operations buffered and remove them if so
+    for (int i = 0; i < position_in_access; i++)
+    {
+        int* access_elem_i = access_array[i].elem_arr_ptr;
+        if (elem_to_delete == access_elem_i)
+        {
+            // delete buff_change
+            LinkedList::Node* elem_buff_ptr = access_array[i].elem_buff_ptr;
+            buffer.remove(elem_buff_ptr);
+            // delete access_tuple
+        }
+    }
 }
 
 // executes the buffered changes at sets the available memory to 3/2
 void DynamicArray::trim()
 {
     // exec all buffer changes
+
+    // delete access_tuples
+    // delete buff_changes
 }
 
 // increases the memory by the specified value
@@ -142,6 +159,20 @@ void DynamicArray::shrink()
     }
 }
 
+// check if element in access and return index in access or -1
+int DynamicArray::checkAccess(int* elem_arr_ptr)
+{
+    for (int i = 0; i < position_in_access; i++)
+    {
+        int* access_elem_i = access_array[i].elem_arr_ptr;
+        if (elem_arr_ptr == access_elem_i)
+        {
+            return i;
+        }
+    }
+    return -1;
+}
+
 // constructor
 BufferedChange::BufferedChange(int* operand, Operator op, int value)
 {
@@ -153,7 +184,7 @@ BufferedChange::BufferedChange(int* operand, Operator op, int value)
 // deconstructor
 BufferedChange::~BufferedChange()
 {
-    // TODO
+    // nothing to do
 }
 
 // gets the value of the element after changes
