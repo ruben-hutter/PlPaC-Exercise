@@ -1,12 +1,10 @@
 #ifndef DYNAMIC_ARRAY_H
 #define DYNAMIC_ARRAY_H
 
-#include "LinkedList.h"
-#include <cmath>
+// #include <cmath>
 #include <iostream>
 
-using namespace std;
-
+// The Buffer's Element
 class BufferedChange
 {
     private:
@@ -16,7 +14,7 @@ class BufferedChange
         int* operand;
         // value in array to apply operator to
         int value;
-        // gets the current value of the element in the array
+        // gets the value of the element after changes
         int getValueOf();
         // applies the add operator
         int add();
@@ -31,25 +29,60 @@ class BufferedChange
         // enum storing all available operations
         enum Operator {NULL_ = 0, ADD = 1, SUBTRACT = 2, MULT = 3, DIV = 4};
         // constructor
-        BufferedChange(int* operand, BufferedChange::Operator op, int value);
+        BufferedChange(int* operand, enum Operator op, int value);
         // deconstructor
         ~BufferedChange();
         // executes the buffered change
         void execute();
-        // operation to apply to value and element
-        int op;
-        // operand to apply operator to
-        int* operand;
-        // value in array to apply operator to
-        int value;
 };
 
+// The Buffer
+class LinkedList
+{
+    private:
+        // head of list
+        struct Node* head;
+        // tail of list
+        struct Node* tail;
+
+    public:
+        // node of linked list
+        struct Node
+        {
+            BufferedChange bufferedChange;
+            struct Node* next;
+            struct Node* prev;
+        };
+        // constructor
+        LinkedList();
+        // destructor
+        ~LinkedList();
+
+        // append node at the end of an element related sequence
+        // of operations and returns the pointer to the beginning
+        // of this sequence. [A,A,B,C] -> append(A), return ptr to A[0]
+        Node* append(BufferedChange* buff_change);
+        // overwrite buffered change sequenze of element, and becomes
+        // first of sequence.
+        void overwrite(BufferedChange* buff_change);
+        // executes buffered changes in this list
+        void execute();
+        // function that returns the value of an element that it
+        // would have, if the buffered changes would be applied.
+        int getValueOf(Node* elem_buff_ptr);
+
+    private:
+        // append to tail
+        void appendTail(BufferedChange* buff_change);
+};
+
+// The Dynamic Array
 class DynamicArray
 {
     private:
-        static const float ALLOC_SIZE = 5/4.0f;
-        static const float FREE_SIZE = 1/2.0f;
-        static const float TRIM_SIZE = 3/2.0f;
+        constexpr static const float ALLOC_SIZE = 5/4.0f;
+        constexpr static const float FREE_SIZE = 1/2.0f;
+        constexpr static const float TRIM_SIZE = 3/2.0f;
         static const int DEFAULT_SIZE = 10;
 
     public:
@@ -81,11 +114,11 @@ class DynamicArray
         // linked list buffer
         LinkedList buffer;
         // access tuple: <elem_arr_ptr, elem_buff_ptr>
-        typedef struct access_tuple
+        typedef struct
         {
             int* elem_arr_ptr;
             LinkedList::Node* elem_buff_ptr;
-        };
+        } access_tuple;
         // access array for fast access to buffer elements
         access_tuple access_array[DEFAULT_SIZE];
         // first free position in access

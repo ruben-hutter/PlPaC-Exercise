@@ -95,7 +95,6 @@ void DynamicArray::remove()
 // executes the buffered changes at sets the available memory to 3/2
 void DynamicArray::trim()
 {
-    // TODO
     // exec all buffer changes
 }
 
@@ -157,7 +156,7 @@ BufferedChange::~BufferedChange()
     // TODO
 }
 
-// gets the current value of the element in the array
+// gets the value of the element after changes
 int BufferedChange::getValueOf()
 {
     switch (op)

@@ -1,4 +1,4 @@
-#include "LinkedList.h"
+#include "DynamicArray.h"
 
 // constructor: initialize list with 0-operation as root/head
 LinkedList::LinkedList()
@@ -65,7 +65,7 @@ int LinkedList::getValueOf(Node* elem_buff_ptr)
 {
     // TODO
     int value;
-    Node actual_elem;
+    LinkedList::Node* actual_elem;
     // iterate from elem_buff_ptr to end of sequence
     // and update value
     return value;
