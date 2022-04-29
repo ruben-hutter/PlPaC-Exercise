@@ -153,6 +153,8 @@ void DynamicArray::overwrite(int index, BufferedChange::Operator op, int value)
         LinkedList::Node* elem_buff_ptr = access_array[at_index].elem_buff_ptr;
         // remove actual sequence
         buffer.remove(elem_buff_ptr);
+        // remove access entry
+        removeAccess(at_index);
     }
     // append to tail of buffer
     buffer.appendTail(new_buff_elem);

@@ -62,9 +62,6 @@ class LinkedList
         // of operations and returns the pointer to the beginning
         // of this sequence. [A,A,B,C] -> append(A), return ptr to A[0]
         Node* append(Node* new_buff_elem, Node* start_of_sequence);
-        // overwrite buffered change sequenze of element, and becomes
-        // first of sequence.
-        void overwriteSequence(Node* new_buff_elem);
         // executes buffered changes in this list
         void execute();
         // function that returns the value of an element that it

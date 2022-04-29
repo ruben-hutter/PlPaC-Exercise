@@ -44,18 +44,6 @@ LinkedList::Node* LinkedList::append(Node* new_buff_elem, Node* start_of_sequenc
     return start_of_sequence;
 }
 
-// overwrite buffered change sequenze of element, and becomes
-// first of sequence.
-void LinkedList::overwriteSequence(Node* new_buff_elem)
-{
-    // TODO
-    // 1. check if elem in access (check if in buffer)
-    // 2a. link prev of sequence start to new buff_change, and next of
-    //     new buff_change to first elem of next sequence (see access_array)
-    // 2b. if not, append to tail and add to access_array
-    //     -> appendTail()
-}
-
 // append to tail
 void LinkedList::appendTail(Node* new_buff_elem)
 {
