@@ -61,7 +61,6 @@ void DynamicArray::set(int index, BufferedChange::Operator op, int value)
     // check if element in access
     int* elem_arr_ptr = &data_ptr[index];
     int at_index = checkAccess(elem_arr_ptr);
-    LinkedList::Node* elem_buff_ptr = access_array[at_index].elem_buff_ptr;
     if (at_index < 0)
     {
         // new access_tuple for elem
@@ -75,6 +74,7 @@ void DynamicArray::set(int index, BufferedChange::Operator op, int value)
     }
     else
     {
+        LinkedList::Node* elem_buff_ptr = access_array[at_index].elem_buff_ptr;
         // append to sequence
         buffer.append(new_buff_elem, elem_buff_ptr);
     }
@@ -118,6 +118,44 @@ void DynamicArray::trim()
     buffer.execute();
     // empty access_array and reset idx_ptr
     clearAccess();
+}
+
+// overwrite elem buffered changes with new buffer entry
+void DynamicArray::overwrite(int index, BufferedChange::Operator op, int value)
+{
+    if (index < 0 || index >= size)
+    {
+        return;
+    }
+    BufferedChange* buff_change = new BufferedChange(&data_ptr[index], op, value);
+    // create new node
+    LinkedList::Node* new_buff_elem = new LinkedList::Node;
+    // link buff_change to node
+    new_buff_elem->bufferedChange = buff_change;
+    // check if element in access
+    int* elem_arr_ptr = &data_ptr[index];
+    int at_index = checkAccess(elem_arr_ptr);
+    if (at_index < 0)
+    {
+        // new access_tuple for elem
+        access_tuple* at = new access_tuple;
+        at->elem_arr_ptr = elem_arr_ptr;
+        at->elem_buff_ptr = new_buff_elem;
+        // add access_tuple to access_array and increment position
+        access_array[position_in_access++] = *at;
+    }
+    else
+    {
+        // if yes, free memory for actual entries and set pointer
+        //      of prev_elem to new_buff_change and pointer of
+        //      new_buff_change to next sequence elem or null if last (tail)
+        // create new buffered change
+        LinkedList::Node* elem_buff_ptr = access_array[at_index].elem_buff_ptr;
+        // remove actual sequence
+        buffer.remove(elem_buff_ptr);
+    }
+    // append to tail of buffer
+    buffer.appendTail(new_buff_elem);
 }
 
 // increases the memory by the specified value

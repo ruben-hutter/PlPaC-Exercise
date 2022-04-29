@@ -6,13 +6,14 @@
 [x] remove()
 [x] removeAccess()
 [x] BufferedChange destructor
+[] overwrite()
 
 ## LinkedList.cpp
 
 [x] error in constructor
 [x] destructor
 [x] append()
-[] overwrite()
+[] overwriteSequence()
 [x] appendTail()
 [x] execute()
 [x] getValueOf()
@@ -24,15 +25,7 @@
 
 ---
 
-## Free memory
+## Debugging
 
-### DynamicArray
-
-[x] access_array and access_tuples
-
-[x] constructor
-[x] set()
-
-### LinkedList
-
-[x] constructor
+[] shrink()
+[] grow()

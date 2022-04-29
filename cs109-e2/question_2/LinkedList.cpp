@@ -46,7 +46,7 @@ LinkedList::Node* LinkedList::append(Node* new_buff_elem, Node* start_of_sequenc
 
 // overwrite buffered change sequenze of element, and becomes
 // first of sequence.
-void LinkedList::overwrite()
+void LinkedList::overwriteSequence(Node* new_buff_elem)
 {
     // TODO
     // 1. check if elem in access (check if in buffer)

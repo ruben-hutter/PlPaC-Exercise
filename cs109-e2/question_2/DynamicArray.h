@@ -64,7 +64,7 @@ class LinkedList
         Node* append(Node* new_buff_elem, Node* start_of_sequence);
         // overwrite buffered change sequenze of element, and becomes
         // first of sequence.
-        void overwrite();
+        void overwriteSequence(Node* new_buff_elem);
         // executes buffered changes in this list
         void execute();
         // function that returns the value of an element that it
@@ -101,10 +101,8 @@ class DynamicArray
         void remove();
         // executes the buffered changes
         void trim();
-        // allocate memory 5/4 size
-        void grow();
-        // free memory size/2
-        void shrink();
+        // overwrite elem buffered changes with new buffer entry
+        void overwrite(int index, BufferedChange::Operator op, int value);
 
         // DEBUGGING
         // print access_array (for debugging)
@@ -138,6 +136,10 @@ class DynamicArray
         void removeAccess(int index);
         // clear access_array
         void clearAccess();
+        // allocate memory 5/4 size
+        void grow();
+        // free memory size/2
+        void shrink();
 };
 
 #endif
