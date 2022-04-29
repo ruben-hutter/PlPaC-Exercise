@@ -114,14 +114,6 @@ class DynamicArray
         // PUBLIC ONLY FOR DEBUGGING
         // linked list buffer
         LinkedList buffer;
-
-    private:
-        // pointer to dynamic array
-        int* data_ptr;
-        // number of elements in dynamic array
-        int size;
-        // size/length of dynamic array
-        int avail;
         // access tuple: <elem_arr_ptr, elem_buff_ptr>
         typedef struct
         {
@@ -132,6 +124,14 @@ class DynamicArray
         access_tuple* access_array;
         // first free position in access
         int position_in_access;
+
+    private:
+        // pointer to dynamic array
+        int* data_ptr;
+        // number of elements in dynamic array
+        int size;
+        // size/length of dynamic array
+        int avail;
         // check if element in access
         int checkAccess(int* elem_arr_ptr);
         // remove access_array entry

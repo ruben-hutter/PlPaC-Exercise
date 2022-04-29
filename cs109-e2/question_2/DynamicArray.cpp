@@ -36,7 +36,7 @@ int DynamicArray::get(int index)
     int* elem_arr_ptr = &data_ptr[index];
     int at_index = checkAccess(elem_arr_ptr);
     LinkedList::Node* elem_buff_ptr = access_array[at_index].elem_buff_ptr;
-    if (0 < at_index)
+    if (at_index >= 0)
     {
         // iterate over buffer and return value for element
         return buffer.getValueOf(elem_buff_ptr);
@@ -67,7 +67,7 @@ void DynamicArray::set(int index, BufferedChange::Operator op, int value)
         // new access_tuple for elem
         access_tuple* at = new access_tuple;
         at->elem_arr_ptr = elem_arr_ptr;
-        at->elem_buff_ptr = elem_buff_ptr;
+        at->elem_buff_ptr = new_buff_elem;
         // add access_tuple to access_array and increment position
         access_array[position_in_access++] = *at;
         // append to tail of buffer
