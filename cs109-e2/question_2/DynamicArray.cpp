@@ -87,7 +87,7 @@ void DynamicArray::add(int element)
     data_ptr[size++] = element;
 }
 
-// remove element from the end of the array
+// remove last element from of array
 void DynamicArray::remove()
 {
     // emtpy array
@@ -96,18 +96,18 @@ void DynamicArray::remove()
         std::cout << "Array is empty!" << std::endl;
         return;
     }
-    int* elem_to_delete = &data_ptr[size];
+    int* elem_to_delete = &data_ptr[size - 1];
     *elem_to_delete = 0;
     shrink();
     // check if operations buffered for elem and remove them if so
     int idx_in_access = checkAccess(elem_to_delete);
-    if (0 < idx_in_access)
+    if (idx_in_access >= 0)
     {
         // delete buffer sequence
         access_tuple access_elem = access_array[idx_in_access];
         buffer.remove(access_elem.elem_buff_ptr);
         // delete access_array entry
-        removeAccess(access_elem, idx_in_access);
+        removeAccess(idx_in_access);
     }
 }
 
@@ -179,7 +179,7 @@ int DynamicArray::checkAccess(int* elem_arr_ptr)
 }
 
 // remove access_array entry
-void DynamicArray::removeAccess(access_tuple access_elem, int index)
+void DynamicArray::removeAccess(int index)
 {
     // temp access_array
     access_tuple* tmp_access = new access_tuple[DEFAULT_SIZE];
@@ -190,11 +190,6 @@ void DynamicArray::removeAccess(access_tuple access_elem, int index)
         if (i != index)
         {
             tmp_access[tmp_ptr++] = access_array[i];
-        }
-        else
-        {
-            // free memory
-            delete &access_array[i];
         }
     }
     // free memory

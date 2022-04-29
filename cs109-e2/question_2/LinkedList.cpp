@@ -137,18 +137,17 @@ void LinkedList::remove(Node* elem_buff_ptr)
             elem_prev->next = actual_elem;
             break;
         }
-        elem_to_delete = actual_elem;
-        actual_elem = actual_elem->next;
-        delete elem_to_delete->bufferedChange;
-        delete elem_to_delete;
         // check if end of list
         if (actual_elem == tail)
         {
             // update pointers
             tail = elem_prev;
             tail->next = NULL;
-            break;
         }
+        elem_to_delete = actual_elem;
+        actual_elem = actual_elem->next;
+        delete elem_to_delete->bufferedChange;
+        delete elem_to_delete;
     }
 }
 

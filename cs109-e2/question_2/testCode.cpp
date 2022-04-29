@@ -11,9 +11,24 @@ int main()
     }
 
     // test get() first time
-    std::cout << "before set array[5]: " << dynamic_array.get(5) << std::endl;
+    std::cout << "before set array[5]: " << dynamic_array.get(39) << std::endl;
     // test set() first time
-    dynamic_array.set(5, BufferedChange::ADD, 5);
+    dynamic_array.set(39, BufferedChange::ADD, 1);
     // test get() second time
-    std::cout << "after set array[5]: " << dynamic_array.get(5) << std::endl;
+    std::cout << "after set array[5]: " << dynamic_array.get(39) << std::endl;
+    // test set() second time
+    dynamic_array.set(39, BufferedChange::DIV, 2);
+
+    // print every data structure
+    dynamic_array.printDynArr();
+    dynamic_array.buffer.printBuffer();
+    dynamic_array.printAccess();
+
+    // test trim()
+    dynamic_array.trim();
+
+    // print every data structure
+    dynamic_array.printDynArr();
+    dynamic_array.buffer.printBuffer();
+    dynamic_array.printAccess();
 }

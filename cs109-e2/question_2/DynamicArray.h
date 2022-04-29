@@ -97,7 +97,7 @@ class DynamicArray
         void set(int index, BufferedChange::Operator op, int value);
         // add an element
         void add(int element);
-        // remove element from the end of the array
+        // remove last element from of array
         void remove();
         // executes the buffered changes
         void trim();
@@ -135,7 +135,7 @@ class DynamicArray
         // check if element in access
         int checkAccess(int* elem_arr_ptr);
         // remove access_array entry
-        void removeAccess(access_tuple access_elem, int index);
+        void removeAccess(int index);
         // clear access_array
         void clearAccess();
 };
