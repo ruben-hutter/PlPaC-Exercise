@@ -7,14 +7,17 @@ DynamicArray::DynamicArray(int initialSize)
     if (initialSize < 0)
     {
         data_ptr = new int[DEFAULT_SIZE];
+        avail = DEFAULT_SIZE;
     }
     else
     {
         data_ptr = new int[initialSize];
+        avail = initialSize;
     }
     // initialize access index to first free position
     access_array = new access_tuple[DEFAULT_SIZE];
     position_in_access = 0;
+    size = 0;
 }
 
 DynamicArray::~DynamicArray()
@@ -53,6 +56,7 @@ void DynamicArray::set(int index, BufferedChange::Operator op, int value)
     BufferedChange* buff_change = new BufferedChange(&data_ptr[index], op, value);
     // create new node
     LinkedList::Node* new_buff_elem = new LinkedList::Node;
+    // link buff_change to node
     new_buff_elem->bufferedChange = buff_change;
     // check if element in access
     int* elem_arr_ptr = &data_ptr[index];
@@ -210,6 +214,28 @@ void DynamicArray::clearAccess()
         delete &access_array[i];
     }
     position_in_access = 0;
+}
+
+// print access_array (for debugging)
+void DynamicArray::printAccess()
+{
+    std::cout << "access_array: ";
+    for (int i = 0; i < position_in_access; i++)
+    {
+        std::cout << *access_array[i].elem_arr_ptr << " ";
+    }
+    std::cout << std::endl;
+}
+
+// print dyn_array (for debugging)
+void DynamicArray::printDynArr()
+{
+    std::cout << "dyn_array: ";
+    for (int i = 0; i < size; i++)
+    {
+        std::cout << data_ptr[i] << " ";
+    }
+    std::cout << std::endl;
 }
 
 // constructor

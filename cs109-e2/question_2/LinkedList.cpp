@@ -153,9 +153,10 @@ void LinkedList::remove(Node* elem_buff_ptr)
 }
 
 // print list (for debugging)
-void LinkedList::print()
+void LinkedList::printBuffer()
 {
     Node* actual_elem = head->next;
+    std::cout << "buffer: ";
     while (actual_elem != NULL)
     {
         std::cout << *(actual_elem->bufferedChange->operand) << " ";

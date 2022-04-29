@@ -75,7 +75,7 @@ class LinkedList
         // remove a sequence of buffered changes
         void remove(Node* elem_buff_ptr);
         // print list (for debugging)
-        void print();
+        void printBuffer();
 };
 
 // The Dynamic Array
@@ -106,6 +106,15 @@ class DynamicArray
         // free memory size/2
         void shrink();
 
+        // DEBUGGING
+        // print access_array (for debugging)
+        void printAccess();
+        // print dyn_array (for debugging)
+        void printDynArr();
+        // PUBLIC ONLY FOR DEBUGGING
+        // linked list buffer
+        LinkedList buffer;
+
     private:
         // pointer to dynamic array
         int* data_ptr;
@@ -123,8 +132,6 @@ class DynamicArray
         access_tuple* access_array;
         // first free position in access
         int position_in_access;
-        // linked list buffer
-        LinkedList buffer;
         // check if element in access
         int checkAccess(int* elem_arr_ptr);
         // remove access_array entry
