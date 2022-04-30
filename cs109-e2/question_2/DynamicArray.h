@@ -81,7 +81,7 @@ class DynamicArray
     private:
         constexpr static const float ALLOC_SIZE = 5/4.0f;
         constexpr static const float FREE_SIZE = 1/2.0f;
-        constexpr static const float TRIM_SIZE = 3/2.0f;
+        constexpr static const float CALC_SIZE = 10/6.0f;
         static const int DEFAULT_SIZE = 10;
 
     public:
@@ -119,24 +119,24 @@ class DynamicArray
         access_tuple* access_array;
         // first free position in access
         int position_in_access;
-
-    private:
-        // pointer to dynamic array
-        int* data_ptr;
+        // allocate memory 5/4 size
+        void grow();
+        // free memory size/2
+        void shrink();
         // number of elements in dynamic array
         int size;
         // size/length of dynamic array
         int avail;
+
+    private:
+        // pointer to dynamic array
+        int* data_ptr;
         // check if element in access
         int checkAccess(int* elem_arr_ptr);
         // remove access_array entry
         void removeAccess(int index);
         // clear access_array
         void clearAccess();
-        // allocate memory 5/4 size
-        void grow();
-        // free memory size/2
-        void shrink();
 };
 
 #endif

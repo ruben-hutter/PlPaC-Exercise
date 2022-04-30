@@ -6,13 +6,13 @@ DynamicArray::DynamicArray(int initialSize)
     // initialize dynamic array of data
     if (initialSize < 0)
     {
-        data_ptr = new int[DEFAULT_SIZE];
         avail = DEFAULT_SIZE;
+        data_ptr = new int[avail];
     }
     else
     {
-        data_ptr = new int[initialSize];
         avail = initialSize;
+        data_ptr = new int[avail];
     }
     // initialize access index to first free position
     access_array = new access_tuple[DEFAULT_SIZE];
@@ -23,6 +23,7 @@ DynamicArray::DynamicArray(int initialSize)
 DynamicArray::~DynamicArray()
 {
     delete[] data_ptr;
+    delete[] access_array;
 }
 
 // gets specified element most recent value
@@ -96,16 +97,16 @@ void DynamicArray::remove()
         std::cout << "Array is empty!" << std::endl;
         return;
     }
-    int* elem_to_delete = &data_ptr[size - 1];
-    *elem_to_delete = 0;
     shrink();
+    int* elem_to_delete = &data_ptr[--size];
+    *elem_to_delete = 0;
     // check if operations buffered for elem and remove them if so
     int idx_in_access = checkAccess(elem_to_delete);
     if (idx_in_access >= 0)
     {
         // delete buffer sequence
-        access_tuple access_elem = access_array[idx_in_access];
-        buffer.remove(access_elem.elem_buff_ptr);
+        access_tuple* access_elem = &access_array[idx_in_access];
+        buffer.remove(access_elem->elem_buff_ptr);
         // delete access_array entry
         removeAccess(idx_in_access);
     }
@@ -163,13 +164,14 @@ void DynamicArray::overwrite(int index, BufferedChange::Operator op, int value)
 // increases the memory by the specified value
 void DynamicArray::grow()
 {
-    if (size == avail)
+    if (avail == ceil(ALLOC_SIZE * size))
     {
         // exec all buffer changes
         trim();
         // alloc space for new array
-        int new_size = ceil(ALLOC_SIZE * avail);
-        int* new_arr = new int[new_size];
+        int new_avail = ceil(CALC_SIZE * size);
+        std::cout << "[grow] new_avail = " << new_avail << std::endl;
+        int* new_arr = new int[new_avail];
         // copy data
         for (int i = 0; i < avail; i++)
         {
@@ -178,20 +180,21 @@ void DynamicArray::grow()
         // free old memory
         delete[] data_ptr;
         data_ptr = new_arr;
-        avail = new_size;
+        avail = new_avail;
     }
 }
 
 // decreases the memory by the specified value
 void DynamicArray::shrink()
 {
-    if (size == avail * FREE_SIZE)
+    if (avail > 2 * size)
     {
         // exec all buffer changes
         trim();
         // alloc space for new array
-        int new_size = ceil(FREE_SIZE * avail);
-        int* new_arr = new int[new_size];
+        int new_avail = ceil(CALC_SIZE * size);
+        std::cout << "[shrink] new_avail = " << new_avail << std::endl;
+        int* new_arr = new int[new_avail];
         // copy data
         for (int i = 0; i < avail; i++)
         {
@@ -200,7 +203,7 @@ void DynamicArray::shrink()
         // free old memory
         delete[] data_ptr;
         data_ptr = new_arr;
-        avail = new_size;
+        avail = new_avail;
     }
 }
 
@@ -266,7 +269,7 @@ void DynamicArray::printAccess()
 void DynamicArray::printDynArr()
 {
     std::cout << "dyn_array: ";
-    for (int i = 0; i < size; i++)
+    for (int i = 0; i < avail; i++)
     {
         std::cout << data_ptr[i] << " ";
     }
