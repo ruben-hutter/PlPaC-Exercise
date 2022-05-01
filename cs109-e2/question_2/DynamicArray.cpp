@@ -170,10 +170,9 @@ void DynamicArray::grow()
         trim();
         // alloc space for new array
         int new_avail = ceil(CALC_SIZE * size);
-        std::cout << "[grow] new_avail = " << new_avail << std::endl;
         int* new_arr = new int[new_avail];
         // copy data
-        for (int i = 0; i < size; i++)
+        for (int i = 0; i < avail; i++)
         {
             new_arr[i] = data_ptr[i];
         }
@@ -193,10 +192,9 @@ void DynamicArray::shrink()
         trim();
         // alloc space for new array
         int new_avail = ceil(CALC_SIZE * size);
-        std::cout << "[shrink] new_avail = " << new_avail << std::endl;
         int* new_arr = new int[new_avail];
         // copy data
-        for (int i = 0; i < size; i++)
+        for (int i = 0; i < new_avail; i++)
         {
             new_arr[i] = data_ptr[i];
         }
@@ -246,7 +244,7 @@ void DynamicArray::removeAccess(int index)
 void DynamicArray::clearAccess()
 {
     // iterate access_array
-    for (int i = 0; i < position_in_access; i++)
+    for (int i = 1; i < position_in_access; i++)
     {
         // free memory
         delete &access_array[i];
