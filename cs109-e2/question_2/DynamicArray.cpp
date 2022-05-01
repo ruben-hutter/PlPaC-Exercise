@@ -164,7 +164,7 @@ void DynamicArray::overwrite(int index, BufferedChange::Operator op, int value)
 // increases the memory by the specified value
 void DynamicArray::grow()
 {
-    if (avail == ceil(ALLOC_SIZE * size))
+    if (avail <= ceil(ALLOC_SIZE * size))
     {
         // exec all buffer changes
         trim();
