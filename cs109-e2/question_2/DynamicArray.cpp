@@ -173,7 +173,7 @@ void DynamicArray::grow()
         std::cout << "[grow] new_avail = " << new_avail << std::endl;
         int* new_arr = new int[new_avail];
         // copy data
-        for (int i = 0; i < avail; i++)
+        for (int i = 0; i < size; i++)
         {
             new_arr[i] = data_ptr[i];
         }
@@ -196,7 +196,7 @@ void DynamicArray::shrink()
         std::cout << "[shrink] new_avail = " << new_avail << std::endl;
         int* new_arr = new int[new_avail];
         // copy data
-        for (int i = 0; i < avail; i++)
+        for (int i = 0; i < size; i++)
         {
             new_arr[i] = data_ptr[i];
         }
