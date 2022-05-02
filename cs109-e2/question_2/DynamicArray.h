@@ -101,16 +101,23 @@ class DynamicArray
         // overwrite elem buffered changes with new buffer entry
         void overwrite(int index, BufferedChange::Operator op, int value);
 
-        // DEBUGGING, this all should be in private...
-        //      just public to be able to show functionalities
-        //      by printing data structures....
+        // PUBLIC ONLY FOR DEBUGGING
         // print access_array (for debugging)
         void printAccess();
         // print dyn_array (for debugging)
         void printDynArr();
-        // PUBLIC ONLY FOR DEBUGGING
         // linked list buffer
         LinkedList buffer;
+
+    private:
+        // pointer to dynamic array
+        int* data_ptr;
+        // check if element in access
+        int checkAccess(int* elem_arr_ptr);
+        // remove access_array entry
+        void removeAccess(int index);
+        // clear access_array
+        void clearAccess();
         // access tuple: <elem_arr_ptr, elem_buff_ptr>
         typedef struct
         {
@@ -129,16 +136,6 @@ class DynamicArray
         int size;
         // size/length of dynamic array
         int avail;
-
-    private:
-        // pointer to dynamic array
-        int* data_ptr;
-        // check if element in access
-        int checkAccess(int* elem_arr_ptr);
-        // remove access_array entry
-        void removeAccess(int index);
-        // clear access_array
-        void clearAccess();
 };
 
 #endif
