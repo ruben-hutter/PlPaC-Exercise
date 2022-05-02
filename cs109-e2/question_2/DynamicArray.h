@@ -1,23 +1,17 @@
 #ifndef DYNAMIC_ARRAY_H
 #define DYNAMIC_ARRAY_H
 
-#include "LinkedList.h"
 #include <cmath>
 #include <iostream>
 
-using namespace std;
-
+// The Buffer's Element
 class BufferedChange
 {
     private:
         // operation to apply to value and element
         int op;
-        // operand to apply operator to
-        int* operand;
         // value in array to apply operator to
         int value;
-        // gets the current value of the element in the array
-        int getValueOf();
         // applies the add operator
         int add();
         // applies the subtract aoperator
@@ -31,25 +25,63 @@ class BufferedChange
         // enum storing all available operations
         enum Operator {NULL_ = 0, ADD = 1, SUBTRACT = 2, MULT = 3, DIV = 4};
         // constructor
-        BufferedChange(int* operand, BufferedChange::Operator op, int value);
+        BufferedChange(int* operand, enum Operator op, int value);
         // deconstructor
         ~BufferedChange();
-        // executes the buffered change
-        void execute();
-        // operation to apply to value and element
-        int op;
         // operand to apply operator to
         int* operand;
-        // value in array to apply operator to
-        int value;
+        // gets the value of the element after changes
+        int getValueOf();
+        // executes the buffered change
+        void execute();
 };
 
+// The Buffer
+class LinkedList
+{
+    public:
+        // node of linked list
+        struct Node
+        {
+            BufferedChange* bufferedChange;
+            struct Node* next;
+            struct Node* prev;
+        };
+        // head of list
+        Node* head;
+        // tail of list
+        Node* tail;
+
+    public:
+        // constructor
+        LinkedList();
+        // destructor
+        ~LinkedList();
+
+        // append node at the end of an element related sequence
+        // of operations and returns the pointer to the beginning
+        // of this sequence. [A,A,B,C] -> append(A), return ptr to A[0]
+        Node* append(Node* new_buff_elem, Node* start_of_sequence);
+        // executes buffered changes in this list
+        void execute();
+        // function that returns the value of an element that it
+        // would have, if the buffered changes would be applied.
+        int getValueOf(Node* elem_buff_ptr);
+        // append to tail
+        void appendTail(Node* new_buff_elem);
+        // remove a sequence of buffered changes
+        void remove(Node* elem_buff_ptr);
+        // print list (for debugging)
+        void printBuffer();
+};
+
+// The Dynamic Array
 class DynamicArray
 {
     private:
-        static const float ALLOC_SIZE = 5/4.0f;
-        static const float FREE_SIZE = 1/2.0f;
-        static const float TRIM_SIZE = 3/2.0f;
+        constexpr static const float ALLOC_SIZE = 5/4.0f;
+        constexpr static const float FREE_SIZE = 1/2.0f;
+        constexpr static const float CALC_SIZE = 10/6.0f;
         static const int DEFAULT_SIZE = 10;
 
     public:
@@ -62,34 +94,48 @@ class DynamicArray
         void set(int index, BufferedChange::Operator op, int value);
         // add an element
         void add(int element);
-        // remove element
+        // remove last element from of array
         void remove();
-        // executes the buffered changes at sets the available memory to 3/2
+        // executes the buffered changes
         void trim();
-        // allocate memory 5/4 size
-        void grow();
-        // free memory size/2
-        void shrink();
+        // overwrite elem buffered changes with new buffer entry
+        void overwrite(int index, BufferedChange::Operator op, int value);
+
+        // PUBLIC ONLY FOR DEBUGGING
+        // print access_array (for debugging)
+        void printAccess();
+        // print dyn_array (for debugging)
+        void printDynArr();
+        // linked list buffer
+        LinkedList buffer;
 
     private:
         // pointer to dynamic array
         int* data_ptr;
+        // check if element in access
+        int checkAccess(int* elem_arr_ptr);
+        // remove access_array entry
+        void removeAccess(int index);
+        // clear access_array
+        void clearAccess();
+        // access tuple: <elem_arr_ptr, elem_buff_ptr>
+        typedef struct
+        {
+            int* elem_arr_ptr;
+            LinkedList::Node* elem_buff_ptr;
+        } access_tuple;
+        // access array for fast access to buffer elements
+        access_tuple* access_array;
+        // first free position in access
+        int position_in_access;
+        // allocate memory 5/4 size
+        void grow();
+        // free memory size/2
+        void shrink();
         // number of elements in dynamic array
         int size;
         // size/length of dynamic array
         int avail;
-        // linked list buffer
-        LinkedList buffer;
-        // access tuple: <elem_arr_ptr, elem_buff_ptr>
-        typedef struct access_tuple
-        {
-            int* elem_arr_ptr;
-            LinkedList::Node* elem_buff_ptr;
-        };
-        // access array for fast access to buffer elements
-        access_tuple access_array[DEFAULT_SIZE];
-        // first free position in access
-        int position_in_access;
 };
 
 #endif
