@@ -2,7 +2,7 @@
 
 ## Debugging
 
-[] shrink()
-[] grow()
+[x] shrink()
+[x] grow()
 [] various combinations of DynamicArray mathods
-[] ~DynamicArray() -> access_array gives invalid pointer, core dumped...
+[x] ~DynamicArray() -> access_array gives invalid pointer, core dumped...

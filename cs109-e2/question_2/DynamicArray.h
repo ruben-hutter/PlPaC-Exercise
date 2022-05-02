@@ -101,7 +101,9 @@ class DynamicArray
         // overwrite elem buffered changes with new buffer entry
         void overwrite(int index, BufferedChange::Operator op, int value);
 
-        // DEBUGGING
+        // DEBUGGING, this all should be in private...
+        //      just public to be able to show functionalities
+        //      by printing data structures....
         // print access_array (for debugging)
         void printAccess();
         // print dyn_array (for debugging)
