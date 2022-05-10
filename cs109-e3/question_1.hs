@@ -17,3 +17,6 @@ getPrimes n m = [x | x <- getDivisors n, x `elem` getDivisors m, isPrime x]
 
 -- f) xor two strings
 xorStrings s1 s2 = 0
+
+-- g) average of list
+average myList = sum myList / fromIntegral (length myList)
