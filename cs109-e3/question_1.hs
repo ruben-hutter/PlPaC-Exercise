@@ -1,4 +1,3 @@
-import Data.Bits (Bits(xor))
 -- a) find ith element of a list
 atIndex n myList = last (take (n+1) myList)
 
