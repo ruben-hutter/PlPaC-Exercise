@@ -14,7 +14,10 @@ getDivisors n = [x | x <- [1..n], mod n x == 0]
 getPrimes n m = [x | x <- getDivisors n, x `elem` getDivisors m, (x > 1) && null [ y | y <- [2..x - 1], x `mod` y == 0]]
 
 -- f) xor two strings
---xorStrings s1 s2 = [x | y <- s1, z <- s2, if y /= z then x = 1 else x = 0]
+xorStrings s1 s2 = zipWith(xor) s1 s2
+xor y z
+    | y == z = "0"
+    | otherwise = "1"
 
 -- g) average of list
 average myList = sum myList / fromIntegral (length myList)
