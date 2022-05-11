@@ -1,7 +1,7 @@
 sorted :: (Ord a) => [a] -> Bool
 sorted [] = True
 sorted [x] = True
-sorted (x:y:xs) = if x <= y then sorted (y:xs) else False
+sorted (x:y:xs) = (x <= y) && sorted (y:xs)
 
 mergesort :: Ord a => [a] -> [a]
 mergesort [] = []
