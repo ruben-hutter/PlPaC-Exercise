@@ -11,11 +11,10 @@ removeItem i myList = [x | x <- myList, x /= i]
 getDivisors n = [x | x <- [1..n], mod n x == 0]
 
 -- e) list containing shared prime factors of 2 integers
-getPrimes n m = [x | x <- getDivisors n, x `elem` getDivisors m, getDivisors x == [1,n]]
+getPrimes n m = [x | x <- getDivisors n, x `elem` getDivisors m, (x > 1) && null [ y | y <- [2..x - 1], x `mod` y == 0]]
 
 -- f) xor two strings
-xorStrings s1 s2 = [x | y <- s1, z <- s2, if y /= z then x = 1 else x = 0]
--- not working
+--xorStrings s1 s2 = [x | y <- s1, z <- s2, if y /= z then x = 1 else x = 0]
 
 -- g) average of list
 average myList = sum myList / fromIntegral (length myList)
