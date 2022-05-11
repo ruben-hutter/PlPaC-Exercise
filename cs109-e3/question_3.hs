@@ -10,4 +10,3 @@ ackermannList s
     | s == [x] = ackFun x 0 3
     | s == [x, y] = ackFun x y 0
     | s == [x, y, z] = ackFun x y z
-    | otherwise = ackFun m (ackFun m (n-1) p) (p-1)
