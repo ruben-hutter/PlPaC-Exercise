@@ -26,8 +26,8 @@ pearson x y = upper / lower
     dy2 = sum (map (^2) dy)
     lower = sqrt dx2 * sqrt dy2
 
-mean_diff :: [Int] -> [Int]
-mean_diff x = map (subtract (mean x)) x
+mean_diff :: [Int] -> [Float]
+mean_diff x = map (subtract (mean x)) from Integral x
 
 audienceScore = [91, 70, 71, 76, 75, 91, 78, 75, 92, 92, 83, 85, 89, 86,
   87, 87, 87, 79, 91, 81, 45, 90, 95, 91, 98, 78, 98]
