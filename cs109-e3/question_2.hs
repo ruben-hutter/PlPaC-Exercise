@@ -8,5 +8,5 @@ recTuples = zip odds (map (1/) odds)
 sumTuples tupleLst d = helper tupleLst d 0 0
 
 helper tupleList d idx mySum
-    | mySum >= d    = []
-    | otherwise     = tupleList !! idx : helper tupleList d (idx + 1) (mySum + snd (tupleList !! idx))
+    | mySum >= d = []
+    | otherwise = tupleList !! idx : helper tupleList d (idx + 1) (mySum + snd (tupleList !! idx))
