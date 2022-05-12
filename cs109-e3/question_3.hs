@@ -5,8 +5,9 @@ ackFun m n p
     | p > 2 = m
     | otherwise = ackFun m (ackFun m (n-1) p) (p-1)
 
-ackermannList s
-    | s == []
-    | s == [x] = ackFun x 0 3
-    | s == [x, y] = ackFun x y 0
-    | s == [x, y, z] = ackFun x y z
+ackermannList:: [Int] -> [Int]
+ackermannList [] = [12]
+ackermannList [x] = [(ackFun x 0 3)]
+ackermannList [x, y] = [(ackFun x y 0)]
+ackermannList [x, y, z] = [(ackFun x y z)]
+ackermannList (x:y:z:rest) = (ackFun x y z):(ackermannList rest)
