@@ -16,18 +16,18 @@ lenAndSum xs = go (0,0) xs
 mean :: (Fractional n) => [Integer] -> n
 mean xs = let (a, b) = lenAndSum xs in (fromInteger b / fromInteger a)
 
--- pearson :: [Int] -> [Int] -> Int
--- pearson x y = upper / lower
---   where
---     dx = mean_diff x
---     dy = mean_diff y
---     upper = sum (zipWith (*) dx dy)
---     dx2 = sum (map (^2) dx)
---     dy2 = sum (map (^2) dy)
---     lower = sqrt dx2 * sqrt dy2
+pearson :: (Num a) => [a] -> [a] -> a
+pearson x y = upper / lower
+  where
+    dx = mean_diff x
+    dy = mean_diff y
+    upper = sum (zipWith (*) dx dy)
+    dx2 = sum (map (^2) dx)
+    dy2 = sum (map (^2) dy)
+    lower = sqrt dx2 * sqrt dy2
 
--- mean_diff :: [Int] -> [Float]
--- mean_diff x = map (subtract (mean x)) from Integral x
+mean_diff :: (Fractional a) => [Integer] -> [a]
+mean_diff x = map (- (mean (fromInteger x))) x
 
 audienceScore = [91, 70, 71, 76, 75, 91, 78, 75, 92, 92, 83, 85, 89, 86,
   87, 87, 87, 79, 91, 81, 45, 90, 95, 91, 98, 78, 98]
