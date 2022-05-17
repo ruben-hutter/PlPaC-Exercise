@@ -1,5 +1,10 @@
 import Data.Complex
 
+main = 
+    where
+        x_range = [-2, -1.995..1]
+        y_range = [-1.5, -1.4..1.5]
+
 -- check if c is in mandelbrot set
 calc_mandelbrot :: Complex -> Complex -> Int
 calc_mandelbrot z c = iter_mandelbrot z c 0

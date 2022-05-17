@@ -1,7 +1,15 @@
 sorted :: (Ord a) => [a] -> Bool
-sorted [] = True
-sorted [x] = True
-sorted (x:y:xs) = (x <= y) && sorted (y:xs)
+sorted = sorted_desc a || sorted_asc a
+
+sorted_desc :: (Ord a) => [a] -> Bool
+sorted_desc [] = True
+sorted_desc [x] = True
+sorted_desc (x:y:xs) = (x >= y) && sorted (y:xs)
+
+sorted_asc :: (Ord a) => [a] -> Bool
+sorted_asc [] = True
+sorted_asc [x] = True
+sorted_asc (x:y:xs) = (x <= y) && sorted (y:xs)
 
 mergesort :: Ord a => [a] -> [a]
 mergesort [] = []
