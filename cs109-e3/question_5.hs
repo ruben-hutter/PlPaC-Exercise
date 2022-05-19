@@ -8,26 +8,30 @@ mfilter p (x:xs)
     | otherwise = mfilter p xs
 mfilter _ [] = []
 
-lenAndSum :: (Num a) => [a] -> (a,a)
+lenAndSum :: Num a => [a] -> (a,a)
 lenAndSum xs = go (0,0) xs
-  where go (s1,s2) [] = (s1,s2)
+    where
+        go (s1,s2) [] = (s1,s2)
         go (s1,s2) (a:as) = go (s1+1, s2+a) as
 
-mean :: (Fractional n) => [Integer] -> n
-mean xs = let (a, b) = lenAndSum xs in (fromInteger b / fromInteger a)
+mean :: (Real m, Fractional n) => [m] -> n
+mean xs = let (a, b) = lenAndSum xs in (realToFrac b / realToFrac a)
 
-pearson :: (Num a) => [a] -> [a] -> a
-pearson x y = upper / lower
-  where
-    dx = mean_diff x
-    dy = mean_diff y
-    upper = sum (zipWith (*) dx dy)
-    dx2 = sum (map (^2) dx)
-    dy2 = sum (map (^2) dy)
-    lower = sqrt dx2 * sqrt dy2
+mean_diff :: (Real m, Fractional a) => [m] -> [a]
+mean_diff x = realToFrac y
+    where
+        x_ = mean x
+        y = map (subtract x_) x
 
-mean_diff :: (Fractional a) => [Integer] -> [a]
-mean_diff x = map (- (mean (fromInteger x))) x
+-- pearson :: Num a => [Integer] -> [Integer] -> a
+-- pearson x y = upper / lower
+--     where
+--         dx = mean_diff x
+--         dy = mean_diff y
+--         upper = sum (zipWith (*) dx dy)
+--         dx2 = sum (map (^2) dx)
+--         dy2 = sum (map (^2) dy)
+--         lower = sqrt dx2 * sqrt dy2
 
 audienceScore = [91, 70, 71, 76, 75, 91, 78, 75, 92, 92, 83, 85, 89, 86,
   87, 87, 87, 79, 91, 81, 45, 90, 95, 91, 98, 78, 98]
