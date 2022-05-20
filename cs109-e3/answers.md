@@ -6,11 +6,11 @@
 
 ## Question 5
 
-    * mean audienceScore: ...
-    * mean boxOffice: ...
-    * mean movieDuration: ...
+    * mean audienceScore: 83.74074074074075
+    * mean boxOffice: 195.5
+    * mean movieDuration: 131.92592592592592
 
-    * set with the highest correlation coefficient: ...
+    * set with the highest correlation coefficient: boxOffice with movieDuration: 0.7982592006485658
 
 ## Question 6
 
