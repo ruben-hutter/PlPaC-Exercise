@@ -1,0 +1,8 @@
+a)
+    I)
+        Exist so that you can make a small function quickly, often used when calling map or foldl
+        Sectioning ist partielle anwendungen von funktionen (/3) z.B
+    II)
+        Handled normally, everythign is on stack, resource limit is your memory
+    III)
+        Klammern, dollarzeichen, Punkt

@@ -1,0 +1,46 @@
+Q1)
+a)
+    I) 
+        Objektorientiert, Imperativ, Deklarativ.
+        C++ ist Objektorientiert, Imperativ hat Deklarative Elemente.
+    II)
+        Preprocessor, Compiler, Interpreter.
+        Preprozessor handled #include zuegs,
+        compiler macht programm in maschine code,
+        Interpreter uebersetzt instructions zu andere Instructions (Python z.B.)
+        Fuer C benutzt man Preprocessor und Compiler, wahrscheinlich keine Interpreter.
+    III)
+        Primitive, Benutzerdefinierte Datentypen, Zeigertypen (abstrakt)
+        Primitiv in programmiersproch dinne, benutzerdefiniert isch z.B. Klasse vom programmierer definiert und zeiger sind zeiger :)
+        Properties von Typsystemen:
+            - Vollstaendigkeit
+            - Korrektheit
+            - Entscheidbarkeit
+        
+        1.) Typueberpruefung
+                Statisch: Zur Compilzeit werden Typen ueberprueft
+                Dynamisch: Zur Laufzeit werden Typen ueberprueft
+        2.) Typkompatibilitaet
+                Strukturell: Wenn gleiche struktur, dann sind zwei typen gleich
+                Nominell: Wenn zwei Typen den gleichen Namen haben, dann sind sie gleich.
+        3.) Typbestimmung
+                Abgeleitet: Der Typ der Variable muss klar sein aus dem Kontext.
+                Manifest: Explizit jede variable wird deklariert was fuer ein Typ sie hat.
+    IV)
+        Namespaces und Bloecke (z.B. {})
+        Function Overloading 
+        Global Variables
+        3 Ways to modify: Public, Protected, Private
+    V)
+        - Big endian, little endian
+        - Code, Global, Heap, Stack
+        - Ns for register, #ns cache, 100 ns memory, microsek ssd, 150ms network
+        - memory access, heap allocation, variable initializations
+        - Lets you use functions before you declare them.
+        - dinimom
+        - kei delete nach em new, irgendwenn kei memory mehr available. Dangling Pointers show to memory that doesnt contain info anymore. yes! :D
+        - l values have a space in memory for them, r values are verything else (sind uf de rechte site), referenz zeigt uf memory beriec 
+    VI)
+        - Templates zur kompilierzeit, dh fehlker erst dann sichtbar, preciompiler vor dem kompiliern. Yes there are validation checks. 
+
+    
