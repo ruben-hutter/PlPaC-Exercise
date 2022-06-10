@@ -7,7 +7,7 @@ foo (x, y, z)
     | otherwise = y - z
 
 -- curried version
-curry_foo :: Bool -> Int -> Int -> Int
-curry_foo x y z = 
+curryFoo :: Bool -> Int -> Int -> Int
+curryFoo x y z 
     | x = y + z
     | otherwise = y - z
