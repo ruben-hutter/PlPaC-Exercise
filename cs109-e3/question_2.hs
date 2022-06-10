@@ -9,4 +9,6 @@ sumTuples tupleLst d = helper tupleLst d 0 0
 
 helper tupleList d idx mySum
     | mySum >= d = []
-    | otherwise = tupleList !! idx : helper tupleList d (idx + 1) (mySum + snd (tupleList !! idx))
+    | otherwise = current : helper tupleList d (idx + 1) (mySum + snd current)
+        where
+            current = tupleList !! idx

@@ -1,0 +1,13 @@
+Q3
+a)
+    I) 
+        Term -> Variabel, Atom
+        You can either look for an x when you give partial arguments or you can use it with your own input to check if the expression is true. 
+        Knowledge Base: Facts and Rules. Order in which they appear is important (is read from left to right, then from top to bottom).
+        Unification tries to make the left equal to the right, while identity just checks if the same thing is written on the left and the right. 
+        Backtracking, with the ";" operator in the interactive interpreter you can check different paths.
+b)
+    I)
+        
+        
+    
